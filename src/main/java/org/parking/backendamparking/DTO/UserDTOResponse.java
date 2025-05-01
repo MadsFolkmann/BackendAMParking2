@@ -1,6 +1,5 @@
 package org.parking.backendamparking.DTO;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +23,5 @@ public class UserDTOResponse {
         this.email = user.getEmail();
         this.number = user.getNumber();
         this.lejemaal = user.getLejemaal();
-
     }
 }

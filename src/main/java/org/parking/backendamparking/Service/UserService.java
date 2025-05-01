@@ -1,19 +1,24 @@
 package org.parking.backendamparking.Service;
 
+import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Entity.User;
 import org.parking.backendamparking.Repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder; // Tilføj passwordEncoder
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;  // Initialiser passwordEncoder
     }
-
 
     /*  Get All Users  */
     public List<UserDTOResponse> getAllUsers() {
@@ -29,6 +34,40 @@ public class UserService {
     }
 
     /* Add User */
-    
+    public UserDTOResponse addUser(UserDTORequest request) {
+        User newUser = new User();
+        newUser.setName(request.getName());
 
+        String hashedPassword = passwordEncoder.encode(request.getPassword());
+        newUser.setPassword(hashedPassword);
+
+        newUser.setEmail(request.getEmail());
+        newUser.setNumber(request.getNumber());
+        newUser.setLejemaal(request.getLejemaal());
+
+        userRepository.save(newUser);
+        return new UserDTOResponse(newUser);
+    }
+
+    /* Update User */
+    public UserDTOResponse updateUser(Long id, UserDTORequest request) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setName(request.getName());
+
+        if (!request.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        user.setEmail(request.getEmail());
+        user.setNumber(request.getNumber());
+        user.setLejemaal(request.getLejemaal());
+
+        userRepository.save(user);
+        return new UserDTOResponse(user);
+    }
+
+    /* Delete User */
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }

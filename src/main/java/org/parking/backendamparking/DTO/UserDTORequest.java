@@ -7,7 +7,9 @@ import lombok.Setter;
 @Setter
 
 public class UserDTORequest {
-    private Long id;
     private String name;
     private String password;
+    private String email;
+    private String number;
+    private String lejemaal;
 }
