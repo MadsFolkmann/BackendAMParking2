@@ -15,7 +15,7 @@ import java.util.List;
 public class UserController {
 
 
-     private final UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -30,7 +30,6 @@ public class UserController {
         public UserDTOResponse getUserById(@PathVariable Long id) {
             return userService.getUserById(id);
         }
-
 
         @GetMapping("/lejemaal/{lejemaal}")
         public List<UserDTOResponse> getUsersByLejemaal(@PathVariable String lejemaal) {
