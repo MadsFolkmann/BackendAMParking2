@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class UserDTORequest {
     private String name;
     private String password;

@@ -18,17 +18,35 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        /* User */
                         .requestMatchers(antMatcher("/user")).permitAll()
                         .requestMatchers(antMatcher("/user/add")).permitAll()
                         .requestMatchers(antMatcher("/user/update/**")).permitAll()
                         .requestMatchers(antMatcher("/user/delete/**")).permitAll()
                         .requestMatchers(antMatcher("/user/lejemaal/**")).permitAll()
                         .requestMatchers(antMatcher("/user/login")).permitAll()
-
                         .requestMatchers(antMatcher("/user/{id}")).permitAll()
                         .requestMatchers(antMatcher("/user")).permitAll()
 
+
+                        /* Parking */
+
+                        .requestMatchers(antMatcher("/parking")).permitAll()
+                        .requestMatchers(antMatcher("/parking/add")).permitAll()
+                        .requestMatchers(antMatcher("/parking/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/parking/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/parking/plateNumber/**")).permitAll()
+                        .requestMatchers(antMatcher("/parking/user/**")).permitAll()
+                        .requestMatchers(antMatcher("/parking/{id}")).permitAll()
+
+
+                        /* Tillad Swagger */
+                        .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
+                        .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()
+                        .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         .anyRequest().authenticated()
+
+
                 )
                 .formLogin(form -> form.permitAll())
                 .httpBasic();

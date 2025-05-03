@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -14,8 +16,8 @@ public class Parking {
     private Long id;
     private String pArea;
     private Long plateNumber;
-    private String startTime;
-    private String endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
