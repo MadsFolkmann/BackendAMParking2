@@ -33,6 +33,14 @@ public class UserService {
         return new UserDTOResponse(userRepository.findById(id).orElseThrow());
     }
 
+    /*  Get Users by Lejemaal  */
+    public List<UserDTOResponse> getUsersByLejemaal(String lejemaal) {
+        List<User> users = userRepository.findByLejemaal(lejemaal);
+        return users.stream()
+                .map(UserDTOResponse::new)
+                .collect(Collectors.toList());
+    }
+
     /* Add User */
     public UserDTOResponse addUser(UserDTORequest request) {
         User newUser = new User();
@@ -47,6 +55,16 @@ public class UserService {
 
         userRepository.save(newUser);
         return new UserDTOResponse(newUser);
+    }
+
+    /* Login User */
+    public UserDTOResponse loginUser(String email, String password) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            return new UserDTOResponse(user);
+        } else {
+            throw new RuntimeException("Invalid credentials");
+        }
     }
 
     /* Update User */

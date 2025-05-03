@@ -31,12 +31,24 @@ public class UserController {
             return userService.getUserById(id);
         }
 
+
+        @GetMapping("/lejemaal/{lejemaal}")
+        public List<UserDTOResponse> getUsersByLejemaal(@PathVariable String lejemaal) {
+            return userService.getUsersByLejemaal(lejemaal);
+        }
+
      @PostMapping("/add")
      public UserDTOResponse addUser(@RequestBody UserDTORequest userDTORequest) {
          return userService.addUser(userDTORequest);
      }
 
-     @PutMapping("/update/{id}")
+    @PostMapping("/login")
+    public UserDTOResponse loginUser(@RequestBody UserDTORequest request) {
+        return userService.loginUser(request.getEmail(), request.getPassword());
+    }
+
+
+    @PutMapping("/update/{id}")
      public UserDTOResponse updateUser(@PathVariable Long id, @RequestBody UserDTORequest userDTORequest) {
          return userService.updateUser(id, userDTORequest);
      }

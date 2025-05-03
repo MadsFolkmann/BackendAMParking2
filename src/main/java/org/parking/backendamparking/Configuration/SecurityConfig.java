@@ -20,6 +20,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(antMatcher("/user")).permitAll()
                         .requestMatchers(antMatcher("/user/add")).permitAll()
+                        .requestMatchers(antMatcher("/user/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/user/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/user/lejemaal/**")).permitAll()
+                        .requestMatchers(antMatcher("/user/login")).permitAll()
+
+                        .requestMatchers(antMatcher("/user/{id}")).permitAll()
+                        .requestMatchers(antMatcher("/user")).permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.permitAll())
