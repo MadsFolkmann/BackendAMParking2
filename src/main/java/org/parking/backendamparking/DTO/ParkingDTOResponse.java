@@ -19,6 +19,7 @@ public class ParkingDTOResponse {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long userId;
+    private String userName;
 
     public ParkingDTOResponse(Parking parking) {
         this.id = parking.getId();
@@ -27,6 +28,7 @@ public class ParkingDTOResponse {
         this.startTime = parking.getStartTime();
         this.endTime = parking.getEndTime();
         this.userId = parking.getUser() != null ? parking.getUser().getId() : null;
+        this.userName = parking.getUser() != null ? parking.getUser().getName() : null;
     }
 }
 
