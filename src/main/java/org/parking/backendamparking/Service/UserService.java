@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder; // Tilføj passwordEncoder
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;  // Initialiser passwordEncoder
+        this.passwordEncoder = passwordEncoder;
     }
 
     /*  Get All Users  */
@@ -34,7 +34,7 @@ public class UserService {
     }
 
     /*  Get Users by Lejemaal  */
-    public List<UserDTOResponse> getUsersByLejemaal(String lejemaal) {
+    public List<UserDTOResponse> getUsersByLejemaal(Long lejemaal) {
         List<User> users = userRepository.findByLejemaal(lejemaal);
         return users.stream()
                 .map(UserDTOResponse::new)
@@ -52,6 +52,9 @@ public class UserService {
         newUser.setEmail(request.getEmail());
         newUser.setNumber(request.getNumber());
         newUser.setLejemaal(request.getLejemaal());
+        newUser.setAdress(request.getAdress());
+        newUser.setCity(request.getCity());
+        newUser.setZipCode(request.getZipCode());
 
         userRepository.save(newUser);
         return new UserDTOResponse(newUser);
@@ -79,6 +82,9 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setNumber(request.getNumber());
         user.setLejemaal(request.getLejemaal());
+        user.setAdress(request.getAdress());
+        user.setCity(request.getCity());
+        user.setZipCode(request.getZipCode());
 
         userRepository.save(user);
         return new UserDTOResponse(user);

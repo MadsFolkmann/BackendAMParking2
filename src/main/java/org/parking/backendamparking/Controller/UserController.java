@@ -32,7 +32,7 @@ public class UserController {
         }
 
         @GetMapping("/lejemaal/{lejemaal}")
-        public List<UserDTOResponse> getUsersByLejemaal(@PathVariable String lejemaal) {
+        public List<UserDTOResponse> getUsersByLejemaal(@PathVariable Long lejemaal) {
             return userService.getUsersByLejemaal(lejemaal);
         }
 

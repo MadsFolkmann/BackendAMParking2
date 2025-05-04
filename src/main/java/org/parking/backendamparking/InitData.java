@@ -29,18 +29,24 @@ public class InitData implements CommandLineRunner {
 
       /* Users */
         User user1 = new User();
-        user1.setLejemaal("323212311");
+        user1.setLejemaal(1212323123L);
         user1.setEmail("abdi@gmail.com");
         user1.setPassword("123456");
         user1.setNumber("22232323");
         user1.setName("Abdi");
+        user1.setAdress("Vej 1");
+        user1.setCity("Rødovre");
+        user1.setZipCode(2610);
 
         User user2 = new User();
-        user2.setLejemaal("1212323123");
+        user2.setLejemaal(2112323123L);
         user2.setEmail("mads@gmail.com");
         user2.setPassword("123123123");
         user2.setNumber("2222222");
         user2.setName("Mads");
+        user2.setAdress("Vej 2");
+        user2.setCity("Hvidovre");
+        user2.setZipCode(2650);
 
         User savedUser1 = userRepository.save(user1);
         User savedUser2 = userRepository.save(user2);

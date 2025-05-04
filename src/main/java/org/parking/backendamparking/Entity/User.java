@@ -21,17 +21,25 @@ public class User {
     private String email;
     private String password;
     private String number;
-    private String lejemaal;
+    @Column(nullable = false, unique = true)
+    private Long lejemaal;
+    private String adress;
+    private String city;
+    private int zipCode;
+
 
 
     public User() {
     }
 
-    public User(String name, String email, String password, String number, String lejemaal) {
+    public User(String name, String email, String password, String number, Long lejemaal, String adress, String city, int zipCode) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.number = number;
         this.lejemaal = lejemaal;
+        this.adress = adress;
+        this.city = city;
+        this.zipCode = zipCode;
     }
 }
