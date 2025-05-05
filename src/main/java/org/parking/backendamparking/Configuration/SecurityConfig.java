@@ -40,6 +40,15 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/parking/{id}")).permitAll()
 
 
+                        /* Cars */
+                        .requestMatchers(antMatcher("/cars")).permitAll()
+                        .requestMatchers("/cars/**").permitAll()
+                        .requestMatchers(antMatcher("/cars/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/cars/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/cars/user/**")).permitAll()
+                        .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
+
+
                         /* Tillad Swagger */
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()
