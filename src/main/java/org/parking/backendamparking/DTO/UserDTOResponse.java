@@ -14,7 +14,7 @@ public class UserDTOResponse {
     private String password;
     private String email;
     private String number;
-    private Long lejemaal;
+    private Long rentalUnit;
     private String adress;
     private String city;
     private int zipCode;
@@ -25,7 +25,7 @@ public class UserDTOResponse {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.number = user.getNumber();
-        this.lejemaal = user.getLejemaal();
+        this.rentalUnit = user.getRentalUnit();
         this.adress = user.getAdress();
         this.city = user.getCity();
         this.zipCode = user.getZipCode();

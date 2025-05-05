@@ -10,7 +10,7 @@ public class UserDTORequest {
     private String password;
     private String email;
     private String number;
-    private Long lejemaal;
+    private Long rentalUnit;
     private String adress;
     private String city;
     private int zipCode;

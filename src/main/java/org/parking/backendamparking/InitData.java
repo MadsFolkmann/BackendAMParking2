@@ -29,7 +29,7 @@ public class InitData implements CommandLineRunner {
 
       /* Users */
         User user1 = new User();
-        user1.setLejemaal(1212323123L);
+        user1.setRentalUnit(1212323123L);
         user1.setEmail("abdi@gmail.com");
         user1.setPassword("123456");
         user1.setNumber("22232323");
@@ -39,7 +39,7 @@ public class InitData implements CommandLineRunner {
         user1.setZipCode(2610);
 
         User user2 = new User();
-        user2.setLejemaal(2112323123L);
+        user2.setRentalUnit(2112323123L);
         user2.setEmail("mads@gmail.com");
         user2.setPassword("123123123");
         user2.setNumber("2222222");

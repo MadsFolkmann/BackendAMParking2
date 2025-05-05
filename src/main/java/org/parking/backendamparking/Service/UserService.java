@@ -33,9 +33,9 @@ public class UserService {
         return new UserDTOResponse(userRepository.findById(id).orElseThrow());
     }
 
-    /*  Get Users by Lejemaal  */
-    public List<UserDTOResponse> getUsersByLejemaal(Long lejemaal) {
-        List<User> users = userRepository.findByLejemaal(lejemaal);
+    /*  Get Users by Rental Unit  */
+    public List<UserDTOResponse> getUsersByRentalUnit(Long rentalUnit) {
+        List<User> users = userRepository.findByRentalUnit(rentalUnit);
         return users.stream()
                 .map(UserDTOResponse::new)
                 .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class UserService {
 
         newUser.setEmail(request.getEmail());
         newUser.setNumber(request.getNumber());
-        newUser.setLejemaal(request.getLejemaal());
+        newUser.setRentalUnit(request.getRentalUnit());
         newUser.setAdress(request.getAdress());
         newUser.setCity(request.getCity());
         newUser.setZipCode(request.getZipCode());
@@ -81,7 +81,7 @@ public class UserService {
 
         user.setEmail(request.getEmail());
         user.setNumber(request.getNumber());
-        user.setLejemaal(request.getLejemaal());
+        user.setRentalUnit(request.getRentalUnit());
         user.setAdress(request.getAdress());
         user.setCity(request.getCity());
         user.setZipCode(request.getZipCode());
