@@ -49,6 +49,16 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
 
 
+                        /* Cases */
+                        .requestMatchers(antMatcher("/cases")).permitAll()
+                        .requestMatchers(antMatcher("/cases/add")).permitAll()
+                        .requestMatchers(antMatcher("/cases/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/cases/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/cases/user/**")).permitAll()
+
+
+
+
                         /* Tillad Swagger */
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()

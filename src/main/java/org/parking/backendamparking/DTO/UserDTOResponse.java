@@ -11,9 +11,8 @@ import org.parking.backendamparking.Entity.User;
 public class UserDTOResponse {
     private Long id;
     private String name;
-    private String password;
     private String email;
-    private String number;
+    private int phoneNumber;
     private Long rentalUnit;
     private String adress;
     private String city;
@@ -22,9 +21,8 @@ public class UserDTOResponse {
     public UserDTOResponse(User user) {
         this.id = user.getId();
         this.name = user.getName();
-        this.password = user.getPassword();
         this.email = user.getEmail();
-        this.number = user.getNumber();
+        this.phoneNumber = user.getPhoneNumber();
         this.rentalUnit = user.getRentalUnit();
         this.adress = user.getAdress();
         this.city = user.getCity();

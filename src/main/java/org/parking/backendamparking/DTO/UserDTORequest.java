@@ -9,7 +9,7 @@ public class UserDTORequest {
     private String name;
     private String password;
     private String email;
-    private String number;
+    private int phoneNumber;
     private Long rentalUnit;
     private String adress;
     private String city;

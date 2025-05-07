@@ -1,12 +1,19 @@
 package org.parking.backendamparking;
 
 
+import org.parking.backendamparking.Entity.Cars;
+import org.parking.backendamparking.Entity.Cases;
+import org.parking.backendamparking.Repository.CarsRepository;
+import org.parking.backendamparking.Repository.CasesRepository;
 import org.parking.backendamparking.Repository.ParkingRepository;
 import org.parking.backendamparking.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.parking.backendamparking.Entity.Parking;
 import org.parking.backendamparking.Entity.User;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDateTime;
@@ -15,10 +22,17 @@ import java.time.LocalDateTime;
 public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ParkingRepository parkingRepository;
+    private final CarsRepository carsRepository;
+    private final CasesRepository casesRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public InitData(UserRepository userRepository, ParkingRepository parkingRepository) {
+
+    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.parkingRepository = parkingRepository;
+        this.carsRepository = carsRepository;
+        this.casesRepository = casesRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,8 +45,8 @@ public class InitData implements CommandLineRunner {
         User user1 = new User();
         user1.setRentalUnit(1212323123L);
         user1.setEmail("abdi@gmail.com");
-        user1.setPassword("123456");
-        user1.setNumber("22232323");
+        user1.setPassword(passwordEncoder.encode("password"));
+        user1.setPhoneNumber(22232323);
         user1.setName("Abdi");
         user1.setAdress("Vej 1");
         user1.setCity("Rødovre");
@@ -41,8 +55,8 @@ public class InitData implements CommandLineRunner {
         User user2 = new User();
         user2.setRentalUnit(2112323123L);
         user2.setEmail("mads@gmail.com");
-        user2.setPassword("123123123");
-        user2.setNumber("2222222");
+        user2.setPassword(passwordEncoder.encode("password"));
+        user2.setPhoneNumber(2222222);
         user2.setName("Mads");
         user2.setAdress("Vej 2");
         user2.setCity("Hvidovre");
@@ -70,5 +84,40 @@ public class InitData implements CommandLineRunner {
         Parking parking2Saved = parkingRepository.save(parking2);
 
 
+        /* Cars */
+        Cars cars1 = new Cars();
+        cars1.setNumberPlate("123456L");
+        cars1.setBrand("Toyota");
+        cars1.setModel("Corolla");
+        cars1.setColor("Red");
+        cars1.setUser(user1);
+        Cars cars1Saved = carsRepository.save(cars1);
+
+        Cars cars2 = new Cars();
+        cars2.setNumberPlate("654321L");
+        cars2.setBrand("Honda");
+        cars2.setModel("Civic");
+        cars2.setColor("Blue");
+        cars2.setUser(user2);
+        Cars cars2Saved = carsRepository.save(cars2);
+
+
+
+        /* Cases */
+         Cases cases1 = new Cases();
+        cases1.setTime(LocalDate.from(LocalDateTime.parse("2023-10-01 10:00:00", formatter)));
+        cases1.setDescription("Overholdt ikke tidsfristen for parkering");
+        Cases cases1Saved = casesRepository.save(cases1);
+
+        Cases cases2 = new Cases();
+        cases2.setTime(LocalDate.from(LocalDateTime.parse("2023-10-01 11:00:00", formatter)));
+        cases2.setDescription("Overholdt ikke tidsfristen for parkering");
+        Cases cases2Saved = casesRepository.save(cases2);
+
+
     }
+
+
+
+
 }

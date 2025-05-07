@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
     private String password;
-    private String number;
+    private int phoneNumber;
     @Column(nullable = false, unique = true)
     private Long rentalUnit;
     private String adress;
@@ -32,11 +32,11 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, String number, Long rentalUnit, String adress, String city, int zipCode) {
+    public User(String name, String email, String password, int phoneNumber, Long rentalUnit, String adress, String city, int zipCode) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.number = number;
+        this.phoneNumber = phoneNumber;
         this.rentalUnit = this.rentalUnit;
         this.adress = adress;
         this.city = city;

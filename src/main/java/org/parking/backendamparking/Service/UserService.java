@@ -50,7 +50,7 @@ public class UserService {
         newUser.setPassword(hashedPassword);
 
         newUser.setEmail(request.getEmail());
-        newUser.setNumber(request.getNumber());
+        newUser.setPhoneNumber(request.getPhoneNumber());
         newUser.setRentalUnit(request.getRentalUnit());
         newUser.setAdress(request.getAdress());
         newUser.setCity(request.getCity());
@@ -70,6 +70,7 @@ public class UserService {
         }
     }
 
+
     /* Update User */
     public UserDTOResponse updateUser(Long id, UserDTORequest request) {
         User user = userRepository.findById(id).orElseThrow();
@@ -80,7 +81,7 @@ public class UserService {
         }
 
         user.setEmail(request.getEmail());
-        user.setNumber(request.getNumber());
+        user.setPhoneNumber(request.getPhoneNumber());
         user.setRentalUnit(request.getRentalUnit());
         user.setAdress(request.getAdress());
         user.setCity(request.getCity());
