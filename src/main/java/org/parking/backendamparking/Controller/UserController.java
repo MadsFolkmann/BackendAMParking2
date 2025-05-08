@@ -1,5 +1,6 @@
 package org.parking.backendamparking.Controller;
 
+import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Service.UserService;
@@ -40,7 +41,7 @@ public class UserController {
      }
 
     @PostMapping("/login")
-    public UserDTOResponse loginUser(@RequestBody UserDTORequest request) {
+    public UserDTOResponse loginUser(@RequestBody LoginRequest request) {
         return userService.loginUser(request.getEmail(), request.getPassword());
     }
 
