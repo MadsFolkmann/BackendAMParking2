@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class ParkingDTORequest {
     private String pArea;
-    private Long plateNumber;
+    private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long userId;

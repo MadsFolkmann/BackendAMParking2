@@ -26,17 +26,17 @@ public class ParkingController {
     }
 
     @GetMapping("/{id}")
-    public ParkingDTOResponse getParkingById(Long id) {
+    public ParkingDTOResponse getParkingById(@PathVariable Long id) {
         return parkingService.getParkingById(id);
     }
 
     @GetMapping("/plateNumber/{plateNumber}")
-    public ParkingDTOResponse getParkingByPlateNumber(Long plateNumber) {
+    public ParkingDTOResponse getParkingByPlateNumber(@PathVariable String plateNumber) {
         return parkingService.getParkingByPlateNumber(plateNumber);
     }
 
     @GetMapping("/user/{userId}")
-    public List<ParkingDTOResponse> getParkingsByUserId(Long userId) {
+    public List<ParkingDTOResponse> getParkingsByUserId(@PathVariable Long userId) {
         return parkingService.getParkingsByUserId(userId);
     }
 

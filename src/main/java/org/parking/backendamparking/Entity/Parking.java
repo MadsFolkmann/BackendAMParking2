@@ -15,7 +15,7 @@ public class Parking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String pArea;
-    private Long plateNumber;
+    private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     @ManyToOne

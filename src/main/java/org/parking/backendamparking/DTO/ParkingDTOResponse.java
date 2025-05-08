@@ -15,7 +15,7 @@ import java.util.Date;
 public class ParkingDTOResponse {
     private Long id;
     private String pArea;
-    private Long plateNumber;
+    private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long userId;

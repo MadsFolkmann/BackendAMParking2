@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class CasesDTOResponse {
     private Long id;
     private LocalDate time;
-    private User user;
     private String description;
 
 

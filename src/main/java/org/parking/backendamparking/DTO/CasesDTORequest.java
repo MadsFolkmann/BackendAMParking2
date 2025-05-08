@@ -11,6 +11,5 @@ import java.time.LocalDate;
 public class CasesDTORequest {
     private Long id;
     private LocalDate time;
-    private User user;
     private String description;
 }

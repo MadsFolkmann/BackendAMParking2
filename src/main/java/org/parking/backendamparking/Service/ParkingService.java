@@ -31,7 +31,7 @@ public class ParkingService {
     }
 
     /* Get Parking By Plate Number */
-    public ParkingDTOResponse getParkingByPlateNumber(Long plateNumber) {
+    public ParkingDTOResponse getParkingByPlateNumber(String plateNumber) {
         Parking parking = parkingRepository.findByPlateNumber(plateNumber);
         return new ParkingDTOResponse(parking);
     }

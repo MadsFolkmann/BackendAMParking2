@@ -15,7 +15,6 @@ public class Cases {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate time;
-
     private String description;
 
 }
