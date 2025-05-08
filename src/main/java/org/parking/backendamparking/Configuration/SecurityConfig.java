@@ -18,7 +18,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        /* User */
+                        /* Public User endpoints */
                         .requestMatchers(antMatcher("/user")).permitAll()
                         .requestMatchers(antMatcher("/user/add")).permitAll()
                         .requestMatchers(antMatcher("/user/update/**")).permitAll()
@@ -26,11 +26,8 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/user/lejemaal/**")).permitAll()
                         .requestMatchers(antMatcher("/user/login")).permitAll()
                         .requestMatchers(antMatcher("/user/{id}")).permitAll()
-                        .requestMatchers(antMatcher("/user")).permitAll()
 
-
-                        /* Parking */
-
+                        /* Public Parking endpoints */
                         .requestMatchers(antMatcher("/parking")).permitAll()
                         .requestMatchers(antMatcher("/parking/add")).permitAll()
                         .requestMatchers(antMatcher("/parking/update/**")).permitAll()
@@ -39,36 +36,32 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/parking/user/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/{id}")).permitAll()
 
-
-                        /* Cars */
+                        /* Public Cars endpoints */
                         .requestMatchers(antMatcher("/cars")).permitAll()
-                        .requestMatchers("/cars/**").permitAll()
+                        .requestMatchers(antMatcher("/cars/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/update/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/delete/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/user/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
 
-
-                        /* Cases */
+                        /* Public Cases endpoints */
                         .requestMatchers(antMatcher("/cases")).permitAll()
                         .requestMatchers(antMatcher("/cases/add")).permitAll()
                         .requestMatchers(antMatcher("/cases/update/**")).permitAll()
                         .requestMatchers(antMatcher("/cases/delete/**")).permitAll()
                         .requestMatchers(antMatcher("/cases/user/**")).permitAll()
 
-
-
-
-                        /* Tillad Swagger */
+                        /* Swagger (API docs) */
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
+
+
+                        /* All other requests require authentication */
                         .anyRequest().authenticated()
-
-
                 )
-                .formLogin(form -> form.permitAll())
-                .httpBasic();
+                .httpBasic(); // Bruger Basic Auth (ingen login-form)
+
         return http.build();
     }
 
