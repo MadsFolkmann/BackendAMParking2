@@ -2,6 +2,7 @@ package org.parking.backendamparking.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.parking.backendamparking.Roles;
 
 @Getter
 @Setter
@@ -15,4 +16,6 @@ public class UserDTORequest {
     private String adress;
     private String city;
     private int zipCode;
+    private Roles role;
+
 }

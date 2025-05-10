@@ -1,12 +1,9 @@
 package org.parking.backendamparking.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.parking.backendamparking.Roles;
 
 @Getter
 @Setter
@@ -27,6 +24,8 @@ public class User {
     private String adress;
     private String city;
     private int zipCode;
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
 
 

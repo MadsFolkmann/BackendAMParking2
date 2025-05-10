@@ -4,6 +4,7 @@ import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Entity.User;
 import org.parking.backendamparking.Repository.UserRepository;
+import org.parking.backendamparking.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,8 @@ public class UserService {
         newUser.setCity(request.getCity());
         newUser.setZipCode(request.getZipCode());
 
+        newUser.setRole(request.getRole() != null ? request.getRole() : Roles.USER);
+
         userRepository.save(newUser);
         return new UserDTOResponse(newUser);
     }
@@ -88,6 +91,10 @@ public class UserService {
         user.setAdress(request.getAdress());
         user.setCity(request.getCity());
         user.setZipCode(request.getZipCode());
+
+        if (request.getRole() != null) {
+            user.setRole(request.getRole());
+        }
 
         userRepository.save(user);
         return new UserDTOResponse(user);

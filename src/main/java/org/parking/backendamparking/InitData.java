@@ -52,6 +52,7 @@ public class InitData implements CommandLineRunner {
         user1.setAdress("Vej 1");
         user1.setCity("Rødovre");
         user1.setZipCode(2610);
+        user1.setRole(Roles.USER);
 
         User user2 = new User();
         user2.setRentalUnit(2112323123L);
@@ -63,6 +64,8 @@ public class InitData implements CommandLineRunner {
         user2.setAdress("Vej 2");
         user2.setCity("Hvidovre");
         user2.setZipCode(2650);
+        user1.setRole(Roles.USER);
+
 
         User user3 = new User();
         user3.setRentalUnit(3112323123L);
@@ -74,6 +77,8 @@ public class InitData implements CommandLineRunner {
         user3.setAdress("Vej 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);
+        user1.setRole(Roles.USER);
+
 
 
 
