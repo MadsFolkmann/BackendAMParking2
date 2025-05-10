@@ -145,16 +145,25 @@ public class InitData implements CommandLineRunner {
         pArea1.setAreaName("A");
         pArea1.setCity("Rødovre");
         pArea1.setPostalCode(2610);
-        pArea1.setDaysAllowedParking(2);
+        pArea1.setDaysAllowedParking(3);
         PArea pArea1Saved = pAreaRepository.save(pArea1);
-
 
         PArea pArea2 = new PArea();
         pArea2.setAreaName("B");
         pArea2.setCity("Hvidovre");
         pArea2.setPostalCode(2650);
-        pArea2.setDaysAllowedParking(3);
+        pArea2.setDaysAllowedParking(5);
         PArea pArea2Saved = pAreaRepository.save(pArea2);
+
+
+        PArea pArea3 = new PArea();
+        pArea3.setAreaName("C");
+        pArea3.setCity("Hvidovre");
+        pArea3.setPostalCode(2650);
+        pArea3.setDaysAllowedParking(7);
+        PArea pArea3Saved = pAreaRepository.save(pArea3);
+
+
 
 
 
