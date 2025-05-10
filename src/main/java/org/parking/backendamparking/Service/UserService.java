@@ -44,7 +44,8 @@ public class UserService {
     /* Add User */
     public UserDTOResponse addUser(UserDTORequest request) {
         User newUser = new User();
-        newUser.setName(request.getName());
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
 
         String hashedPassword = passwordEncoder.encode(request.getPassword());
         newUser.setPassword(hashedPassword);
@@ -74,7 +75,8 @@ public class UserService {
     /* Update User */
     public UserDTOResponse updateUser(Long id, UserDTORequest request) {
         User user = userRepository.findById(id).orElseThrow();
-        user.setName(request.getName());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
 
         if (!request.getPassword().equals(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(request.getPassword()));

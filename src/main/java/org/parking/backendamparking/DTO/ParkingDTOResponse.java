@@ -28,7 +28,7 @@ public class ParkingDTOResponse {
         this.startTime = parking.getStartTime();
         this.endTime = parking.getEndTime();
         this.userId = parking.getUser() != null ? parking.getUser().getId() : null;
-        this.userName = parking.getUser() != null ? parking.getUser().getName() : null;
+        this.userName = parking.getUser() != null ? parking.getUser().getFirstName() : null;
     }
 }
 
