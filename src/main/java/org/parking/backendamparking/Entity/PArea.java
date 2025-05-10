@@ -13,6 +13,7 @@ import lombok.Setter;
 public class PArea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int daysAllowedParking;
     private String areaName;
     private String city;

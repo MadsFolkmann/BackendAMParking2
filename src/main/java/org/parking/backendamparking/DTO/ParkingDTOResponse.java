@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ParkingDTOResponse {
     private Long id;
-    private String pArea;
+    private String parkingArea;
     private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -23,7 +23,7 @@ public class ParkingDTOResponse {
 
     public ParkingDTOResponse(Parking parking) {
         this.id = parking.getId();
-        this.pArea = parking.getPArea();
+        this.parkingArea = parking.getParkingArea();
         this.plateNumber = parking.getPlateNumber();
         this.startTime = parking.getStartTime();
         this.endTime = parking.getEndTime();

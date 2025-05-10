@@ -84,7 +84,7 @@ public class InitData implements CommandLineRunner {
 
         /* Parkings */
         Parking parking1 = new Parking();
-        parking1.setPArea("A");
+        parking1.setParkingArea("A");
         parking1.setPlateNumber("123456L");
         parking1.setUser(savedUser1);
         parking1.setStartTime(LocalDateTime.parse("2023-10-01 10:00:00", formatter));
@@ -93,7 +93,7 @@ public class InitData implements CommandLineRunner {
         Parking parking1Saved = parkingRepository.save(parking1);
 
         Parking parking2 = new Parking();
-        parking2.setPArea("B");
+        parking2.setParkingArea("B");
         parking2.setPlateNumber("654321L");
         parking2.setUser(savedUser2);
         parking2.setStartTime(LocalDateTime.parse("2023-10-01 11:00:00", formatter));
@@ -101,7 +101,7 @@ public class InitData implements CommandLineRunner {
         Parking parking2Saved = parkingRepository.save(parking2);
 
         Parking parking3 = new Parking();
-        parking3.setPArea("C");
+        parking3.setParkingArea("C");
         parking3.setPlateNumber("789012L");
         parking3.setUser(savedUser3);
         parking3.setStartTime(LocalDateTime.parse("2023-10-01 12:00:00", formatter));
@@ -116,6 +116,8 @@ public class InitData implements CommandLineRunner {
         cars1.setBrand("Toyota");
         cars1.setModel("Corolla");
         cars1.setColor("Red");
+        cars1.setType("Sedan");
+        cars1.setDescription("Toyota Corolla 2020 in red color");
         cars1.setUser(user1);
         Cars cars1Saved = carsRepository.save(cars1);
 
@@ -124,6 +126,8 @@ public class InitData implements CommandLineRunner {
         cars2.setBrand("Honda");
         cars2.setModel("Civic");
         cars2.setColor("Blue");
+        cars2.setType("Sedan");
+        cars2.setDescription("Honda Civic 2020 in blue color");
         cars2.setUser(user2);
         Cars cars2Saved = carsRepository.save(cars2);
 
@@ -162,9 +166,6 @@ public class InitData implements CommandLineRunner {
         pArea3.setPostalCode(2650);
         pArea3.setDaysAllowedParking(7);
         PArea pArea3Saved = pAreaRepository.save(pArea3);
-
-
-
 
 
 

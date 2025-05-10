@@ -14,7 +14,7 @@ public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String pArea;
+    private String parkingArea;
     private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

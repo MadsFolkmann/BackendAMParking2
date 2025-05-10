@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ParkingDTORequest {
-    private String pArea;
+    private String parkingArea;
     private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
