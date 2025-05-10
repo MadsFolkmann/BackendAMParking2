@@ -82,9 +82,33 @@ public class InitData implements CommandLineRunner {
         User savedUser2 = userRepository.save(user2);
         User savedUser3 = userRepository.save(user3);
 
+
+        /* P-Area */
+        PArea pArea1 = new PArea();
+        pArea1.setAreaName("A");
+        pArea1.setCity("Rødovre");
+        pArea1.setPostalCode(2610);
+        pArea1.setDaysAllowedParking(3);
+        PArea pArea1Saved = pAreaRepository.save(pArea1);
+
+        PArea pArea2 = new PArea();
+        pArea2.setAreaName("B");
+        pArea2.setCity("Hvidovre");
+        pArea2.setPostalCode(2650);
+        pArea2.setDaysAllowedParking(5);
+        PArea pArea2Saved = pAreaRepository.save(pArea2);
+
+
+        PArea pArea3 = new PArea();
+        pArea3.setAreaName("C");
+        pArea3.setCity("Hvidovre");
+        pArea3.setPostalCode(2650);
+        pArea3.setDaysAllowedParking(7);
+        PArea pArea3Saved = pAreaRepository.save(pArea3);
+
         /* Parkings */
         Parking parking1 = new Parking();
-        parking1.setParkingArea("A");
+        parking1.setParea(pArea1Saved);
         parking1.setPlateNumber("123456L");
         parking1.setUser(savedUser1);
         parking1.setStartTime(LocalDateTime.parse("2023-10-01 10:00:00", formatter));
@@ -93,7 +117,7 @@ public class InitData implements CommandLineRunner {
         Parking parking1Saved = parkingRepository.save(parking1);
 
         Parking parking2 = new Parking();
-        parking2.setParkingArea("B");
+        parking2.setParea(pArea2Saved);
         parking2.setPlateNumber("654321L");
         parking2.setUser(savedUser2);
         parking2.setStartTime(LocalDateTime.parse("2023-10-01 11:00:00", formatter));
@@ -101,7 +125,7 @@ public class InitData implements CommandLineRunner {
         Parking parking2Saved = parkingRepository.save(parking2);
 
         Parking parking3 = new Parking();
-        parking3.setParkingArea("C");
+        parking3.setParea(pArea3Saved);
         parking3.setPlateNumber("789012L");
         parking3.setUser(savedUser3);
         parking3.setStartTime(LocalDateTime.parse("2023-10-01 12:00:00", formatter));
@@ -144,28 +168,7 @@ public class InitData implements CommandLineRunner {
         cases2.setDescription("Overholdt ikke tidsfristen for parkering");
         Cases cases2Saved = casesRepository.save(cases2);
 
-        /* P-Area */
-        PArea pArea1 = new PArea();
-        pArea1.setAreaName("A");
-        pArea1.setCity("Rødovre");
-        pArea1.setPostalCode(2610);
-        pArea1.setDaysAllowedParking(3);
-        PArea pArea1Saved = pAreaRepository.save(pArea1);
 
-        PArea pArea2 = new PArea();
-        pArea2.setAreaName("B");
-        pArea2.setCity("Hvidovre");
-        pArea2.setPostalCode(2650);
-        pArea2.setDaysAllowedParking(5);
-        PArea pArea2Saved = pAreaRepository.save(pArea2);
-
-
-        PArea pArea3 = new PArea();
-        pArea3.setAreaName("C");
-        pArea3.setCity("Hvidovre");
-        pArea3.setPostalCode(2650);
-        pArea3.setDaysAllowedParking(7);
-        PArea pArea3Saved = pAreaRepository.save(pArea3);
 
 
 

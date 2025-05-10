@@ -1,9 +1,11 @@
 package org.parking.backendamparking.DTO;
 
 
+import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.parking.backendamparking.Entity.PArea;
 import org.parking.backendamparking.Entity.Parking;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ParkingDTOResponse {
     private Long id;
-    private String parkingArea;
+    private PArea parea;
     private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -23,7 +25,7 @@ public class ParkingDTOResponse {
 
     public ParkingDTOResponse(Parking parking) {
         this.id = parking.getId();
-        this.parkingArea = parking.getParkingArea();
+        this.parea = parking.getParea();
         this.plateNumber = parking.getPlateNumber();
         this.startTime = parking.getStartTime();
         this.endTime = parking.getEndTime();
