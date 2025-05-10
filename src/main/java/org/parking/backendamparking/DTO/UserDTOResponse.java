@@ -10,7 +10,8 @@ import org.parking.backendamparking.Entity.User;
 @NoArgsConstructor
 public class UserDTOResponse {
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private int phoneNumber;
     private Long rentalUnit;
@@ -20,7 +21,8 @@ public class UserDTOResponse {
 
     public UserDTOResponse(User user) {
         this.id = user.getId();
-        this.name = user.getName();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.phoneNumber = user.getPhoneNumber();
         this.rentalUnit = user.getRentalUnit();

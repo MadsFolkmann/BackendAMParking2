@@ -47,7 +47,8 @@ public class InitData implements CommandLineRunner {
         user1.setEmail("abdi@gmail.com");
         user1.setPassword(passwordEncoder.encode("password"));
         user1.setPhoneNumber(22232323);
-        user1.setName("Abdi");
+        user1.setFirstName("Abdi");
+        user1.setLastName("Ox");
         user1.setAdress("Vej 1");
         user1.setCity("Rødovre");
         user1.setZipCode(2610);
@@ -57,7 +58,8 @@ public class InitData implements CommandLineRunner {
         user2.setEmail("mads@gmail.com");
         user2.setPassword(passwordEncoder.encode("password"));
         user2.setPhoneNumber(2222222);
-        user2.setName("Mads");
+        user2.setFirstName("Mads");
+        user2.setLastName("Diaz");
         user2.setAdress("Vej 2");
         user2.setCity("Hvidovre");
         user2.setZipCode(2650);
@@ -67,7 +69,8 @@ public class InitData implements CommandLineRunner {
         user3.setEmail("hej@123.dk");
         user3.setPassword(passwordEncoder.encode("hej"));
         user3.setPhoneNumber(2222222);
-        user3.setName("Hej");
+        user3.setFirstName("Hej");
+        user3.setLastName("Dig");
         user3.setAdress("Vej 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);

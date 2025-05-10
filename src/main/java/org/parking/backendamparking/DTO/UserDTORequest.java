@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTORequest {
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
     private String email;
     private int phoneNumber;
