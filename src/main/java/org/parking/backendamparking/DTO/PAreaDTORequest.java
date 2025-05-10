@@ -11,7 +11,7 @@ public class PAreaDTORequest {
     private int daysAllowedParking;
     private String areaName;
     private String city;
-    private String postalCode;
+    private int postalCode;
 
     public PAreaDTORequest() {
     }

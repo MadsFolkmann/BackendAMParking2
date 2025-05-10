@@ -13,7 +13,7 @@ public class PAreaDTOResponse {
     private int daysAllowedParking;
     private String areaName;
     private String city;
-    private String postalCode;
+    private int postalCode;
 
     public PAreaDTOResponse(PArea parea) {
         this.daysAllowedParking = parea.getDaysAllowedParking();

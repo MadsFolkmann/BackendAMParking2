@@ -13,9 +13,9 @@ import lombok.Setter;
 public class PArea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int DaysAllowedParking;
+    private int daysAllowedParking;
     private String areaName;
     private String city;
-    private String postalCode;
+    private int postalCode;
 
 }

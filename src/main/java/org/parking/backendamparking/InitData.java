@@ -1,17 +1,11 @@
 package org.parking.backendamparking;
 
 
-import org.parking.backendamparking.Entity.Cars;
-import org.parking.backendamparking.Entity.Cases;
-import org.parking.backendamparking.Repository.CarsRepository;
-import org.parking.backendamparking.Repository.CasesRepository;
-import org.parking.backendamparking.Repository.ParkingRepository;
-import org.parking.backendamparking.Repository.UserRepository;
+import org.parking.backendamparking.Entity.*;
+import org.parking.backendamparking.Repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.parking.backendamparking.Entity.Parking;
-import org.parking.backendamparking.Entity.User;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,14 +18,16 @@ public class InitData implements CommandLineRunner {
     private final ParkingRepository parkingRepository;
     private final CarsRepository carsRepository;
     private final CasesRepository casesRepository;
+    private final PAreaRepository pAreaRepository;
     private final PasswordEncoder passwordEncoder;
 
 
-    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PasswordEncoder passwordEncoder) {
+    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PAreaRepository pAreaRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.parkingRepository = parkingRepository;
         this.carsRepository = carsRepository;
         this.casesRepository = casesRepository;
+        this.pAreaRepository = pAreaRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -135,6 +131,25 @@ public class InitData implements CommandLineRunner {
         cases2.setTime(LocalDate.from(LocalDateTime.parse("2023-10-01 11:00:00", formatter)));
         cases2.setDescription("Overholdt ikke tidsfristen for parkering");
         Cases cases2Saved = casesRepository.save(cases2);
+
+        /* P-Area */
+        PArea pArea1 = new PArea();
+        pArea1.setAreaName("A");
+        pArea1.setCity("Rødovre");
+        pArea1.setPostalCode(2610);
+        pArea1.setDaysAllowedParking(2);
+        PArea pArea1Saved = pAreaRepository.save(pArea1);
+
+
+        PArea pArea2 = new PArea();
+        pArea2.setAreaName("B");
+        pArea2.setCity("Hvidovre");
+        pArea2.setPostalCode(2650);
+        pArea2.setDaysAllowedParking(3);
+        PArea pArea2Saved = pAreaRepository.save(pArea2);
+
+
+
 
 
     }
