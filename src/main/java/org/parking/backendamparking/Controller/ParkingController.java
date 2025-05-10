@@ -1,7 +1,10 @@
 package org.parking.backendamparking.Controller;
 
 
+import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
+import org.parking.backendamparking.DTO.ParkingDTORequest;
+import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Service.ParkingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,9 +43,9 @@ public class ParkingController {
         return parkingService.getParkingsByUserId(userId);
     }
 
-    @PostMapping(("/"))
-    public ParkingDTOResponse addParking(@RequestBody ParkingDTOResponse parkingDTOResponse) {
-        return parkingService.addParking(parkingDTOResponse);
+    @PostMapping("/add")
+    public ParkingDTOResponse addParking(@RequestBody ParkingDTORequest parkingDTORequest) {
+        return parkingService.addParking(parkingDTORequest);
     }
 
     @PutMapping("/{id}")

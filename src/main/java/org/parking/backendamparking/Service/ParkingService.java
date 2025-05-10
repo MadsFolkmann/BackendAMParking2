@@ -1,5 +1,6 @@
 package org.parking.backendamparking.Service;
 
+import org.parking.backendamparking.DTO.ParkingDTORequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
 import org.parking.backendamparking.Entity.Parking;
 import org.parking.backendamparking.Entity.User;
@@ -54,7 +55,7 @@ public class ParkingService {
     }
 
     /* Add Parking */
-    public ParkingDTOResponse addParking(ParkingDTOResponse request) {
+    public ParkingDTOResponse addParking(ParkingDTORequest request) {
         Parking newParking = new Parking();
         newParking.setPArea(request.getPArea());
         newParking.setPlateNumber(request.getPlateNumber());
