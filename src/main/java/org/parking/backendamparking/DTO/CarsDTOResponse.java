@@ -19,17 +19,18 @@ public class CarsDTOResponse {
     private String description;
     private Long userId;
 
-    public CarsDTOResponse(String numberPlate, String brand, String model, int year, String color, String type, String description) {
-        this.numberPlate = numberPlate;
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.color = color;
-        this.type = type;
-        this.description = description;
-    }
-
-
     public CarsDTOResponse(Cars cars) {
+        this.id = cars.getId();
+        this.numberPlate = cars.getNumberPlate();
+        this.brand = cars.getBrand();
+        this.model = cars.getModel();
+        this.year = cars.getYear();
+        this.color = cars.getColor();
+        this.type = cars.getType();
+        this.description = cars.getDescription();
+        this.userId = cars.getUser().getId();
+
     }
+
+
 }

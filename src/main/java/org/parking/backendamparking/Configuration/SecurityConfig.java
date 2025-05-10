@@ -51,6 +51,15 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/cases/delete/**")).permitAll()
                         .requestMatchers(antMatcher("/cases/user/**")).permitAll()
 
+                        /* Public PArea endpoints */
+                        .requestMatchers(antMatcher("/pArea")).permitAll()
+                        .requestMatchers(antMatcher("/pArea/add")).permitAll()
+                        .requestMatchers(antMatcher("/pArea/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/pArea/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/pArea/{areaName}")).permitAll()
+                        .requestMatchers(antMatcher("/pArea/{id}")).permitAll()
+
+
                         /* Swagger (API docs) */
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()
