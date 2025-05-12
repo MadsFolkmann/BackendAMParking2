@@ -68,7 +68,7 @@ public class ParkingService {
     }
 
     /* Update Parking */
-    public ParkingDTOResponse updateParking(Long id, ParkingDTOResponse request) {
+    public ParkingDTOResponse updateParking(Long id, ParkingDTORequest request) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
         parking.setParea(request.getParea());
         parking.setPlateNumber(request.getPlateNumber());

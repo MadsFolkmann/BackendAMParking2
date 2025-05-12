@@ -10,6 +10,7 @@ import org.parking.backendamparking.Entity.PArea;
 @Setter
 @NoArgsConstructor
 public class PAreaDTOResponse {
+    private Long id;
     private int daysAllowedParking;
     private String areaName;
     private String city;

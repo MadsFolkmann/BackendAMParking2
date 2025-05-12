@@ -49,8 +49,8 @@ public class ParkingController {
     }
 
     @PutMapping("/{id}")
-    public ParkingDTOResponse updateParking(@PathVariable Long id, @RequestBody ParkingDTOResponse parkingDTOResponse) {
-        return parkingService.updateParking(id, parkingDTOResponse);
+    public ParkingDTOResponse updateParking(@PathVariable Long id, @RequestBody ParkingDTORequest parkingDTORequest) {
+        return parkingService.updateParking(id, parkingDTORequest);
     }
 
     @DeleteMapping("/{id}")
