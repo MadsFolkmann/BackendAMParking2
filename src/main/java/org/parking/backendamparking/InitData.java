@@ -19,15 +19,17 @@ public class InitData implements CommandLineRunner {
     private final CarsRepository carsRepository;
     private final CasesRepository casesRepository;
     private final PAreaRepository pAreaRepository;
+    private final RentalUnitRepository rentalUnitRepository;
     private final PasswordEncoder passwordEncoder;
 
 
-    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PAreaRepository pAreaRepository, PasswordEncoder passwordEncoder) {
+    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PAreaRepository pAreaRepository, RentalUnitRepository rentalUnitRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.parkingRepository = parkingRepository;
         this.carsRepository = carsRepository;
         this.casesRepository = casesRepository;
         this.pAreaRepository = pAreaRepository;
+        this.rentalUnitRepository = rentalUnitRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -37,7 +39,51 @@ public class InitData implements CommandLineRunner {
         System.out.println("Henter data fra databasen");
 
 
-      /* Users */
+        RentalUnit unit1 = new RentalUnit(1000000001L);
+        RentalUnit unit2 = new RentalUnit(1000000002L);
+        RentalUnit unit3 = new RentalUnit(1000000003L);
+        RentalUnit unit4 = new RentalUnit(1000000004L);
+        RentalUnit unit5 = new RentalUnit(1000000005L);
+        RentalUnit unit6 = new RentalUnit(1000000006L);
+        RentalUnit unit7 = new RentalUnit(1000000007L);
+        RentalUnit unit8 = new RentalUnit(1000000008L);
+        RentalUnit unit9 = new RentalUnit(1000000009L);
+        RentalUnit unit10 = new RentalUnit(1000000010L);
+        RentalUnit unit11 = new RentalUnit(1000000011L);
+        RentalUnit unit12 = new RentalUnit(1000000012L);
+        RentalUnit unit13 = new RentalUnit(1000000013L);
+        RentalUnit unit14 = new RentalUnit(1000000014L);
+        RentalUnit unit15 = new RentalUnit(1000000015L);
+        RentalUnit unit16 = new RentalUnit(1000000016L);
+        RentalUnit unit17 = new RentalUnit(1000000017L);
+        RentalUnit unit18 = new RentalUnit(1000000018L);
+        RentalUnit unit19 = new RentalUnit(1000000019L);
+        RentalUnit unit20 = new RentalUnit(1000000020L);
+
+        rentalUnitRepository.save(unit1);
+        rentalUnitRepository.save(unit2);
+        rentalUnitRepository.save(unit3);
+        rentalUnitRepository.save(unit4);
+        rentalUnitRepository.save(unit5);
+        rentalUnitRepository.save(unit6);
+        rentalUnitRepository.save(unit7);
+        rentalUnitRepository.save(unit8);
+        rentalUnitRepository.save(unit9);
+        rentalUnitRepository.save(unit10);
+        rentalUnitRepository.save(unit11);
+        rentalUnitRepository.save(unit12);
+        rentalUnitRepository.save(unit13);
+        rentalUnitRepository.save(unit14);
+        rentalUnitRepository.save(unit15);
+        rentalUnitRepository.save(unit16);
+        rentalUnitRepository.save(unit17);
+        rentalUnitRepository.save(unit18);
+        rentalUnitRepository.save(unit19);
+        rentalUnitRepository.save(unit20);
+
+
+
+        /* Users */
         User user1 = new User();
         user1.setRentalUnit(1212323123L);
         user1.setEmail("abdi@gmail.com");
