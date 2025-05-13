@@ -57,7 +57,7 @@ public class ParkingService {
     /* Add Parking */
     public ParkingDTOResponse addParking(ParkingDTORequest request) {
         Parking newParking = new Parking();
-        newParking.setParea(request.getParea());
+        newParking.setParea(request.getPArea());
         newParking.setPlateNumber(request.getPlateNumber());
         newParking.setStartTime(request.getStartTime());
         newParking.setEndTime(request.getEndTime());
@@ -70,7 +70,7 @@ public class ParkingService {
     /* Update Parking */
     public ParkingDTOResponse updateParking(Long id, ParkingDTORequest request) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
-        parking.setParea(request.getParea());
+        parking.setParea(request.getPArea());
         parking.setPlateNumber(request.getPlateNumber());
         parking.setStartTime(request.getStartTime());
         parking.setEndTime(request.getEndTime());
