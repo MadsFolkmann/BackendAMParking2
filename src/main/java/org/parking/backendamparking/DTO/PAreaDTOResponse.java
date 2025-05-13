@@ -17,6 +17,7 @@ public class PAreaDTOResponse {
     private int postalCode;
 
     public PAreaDTOResponse(PArea parea) {
+        this.id = parea.getId();
         this.daysAllowedParking = parea.getDaysAllowedParking();
         this.areaName = parea.getAreaName();
         this.city = parea.getCity();
