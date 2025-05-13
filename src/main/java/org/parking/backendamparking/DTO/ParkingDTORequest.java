@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ParkingDTORequest {
-    private PArea parea;
+    private Long pareaId;
     private String plateNumber;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
