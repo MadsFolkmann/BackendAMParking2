@@ -2,10 +2,8 @@ package org.parking.backendamparking.Service;
 
 import org.parking.backendamparking.DTO.ParkingDTORequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
-import org.parking.backendamparking.Entity.PArea;
 import org.parking.backendamparking.Entity.Parking;
 import org.parking.backendamparking.Entity.User;
-import org.parking.backendamparking.Repository.PAreaRepository;
 import org.parking.backendamparking.Repository.ParkingRepository;
 import org.parking.backendamparking.Repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,13 +16,11 @@ import java.util.stream.Collectors;
 public class ParkingService {
     private final ParkingRepository parkingRepository;
     private final UserRepository userRepository;
-    private final PAreaRepository pAreaRepository;
 
 
-    public ParkingService(ParkingRepository parkingRepository, UserRepository userRepository, PAreaRepository pAreaRepository) {
+    public ParkingService(ParkingRepository parkingRepository, UserRepository userRepository) {
         this.parkingRepository = parkingRepository;
         this.userRepository = userRepository;
-        this.pAreaRepository = pAreaRepository;
     }
 
     /* Get All Parkings */
@@ -61,8 +57,7 @@ public class ParkingService {
     /* Add Parking */
     public ParkingDTOResponse addParking(ParkingDTORequest request) {
         Parking newParking = new Parking();
-        PArea parea = pAreaRepository.findById(request.getPareaId()).orElseThrow();
-        newParking.setParea(parea);
+        newParking.setParea(request.getParea());
         newParking.setPlateNumber(request.getPlateNumber());
         newParking.setStartTime(request.getStartTime());
         newParking.setEndTime(request.getEndTime());
@@ -75,8 +70,7 @@ public class ParkingService {
     /* Update Parking */
     public ParkingDTOResponse updateParking(Long id, ParkingDTORequest request) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
-        PArea parea = pAreaRepository.findById(request.getPareaId()).orElseThrow();
-        parking.setParea(parea);
+        parking.setParea(request.getParea());
         parking.setPlateNumber(request.getPlateNumber());
         parking.setStartTime(request.getStartTime());
         parking.setEndTime(request.getEndTime());
