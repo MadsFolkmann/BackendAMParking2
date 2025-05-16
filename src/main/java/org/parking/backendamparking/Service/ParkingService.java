@@ -85,4 +85,14 @@ public class ParkingService {
         Parking parking = parkingRepository.findById(id).orElseThrow();
         parkingRepository.delete(parking);
     }
+
+    public List<ParkingDTOResponse> getParkingsByUserIdAndYear(Long userId, int year) {
+        List<Parking> parkings = parkingRepository.findAll().stream()
+                .filter(parking -> parking.getUser() != null && parking.getUser().getId().equals(userId))
+                .filter(parking -> parking.getStartTime().getYear() == year)
+                .collect(Collectors.toList());
+        return parkings.stream()
+                .map(ParkingDTOResponse::new)
+                .collect(Collectors.toList());
+    }
 }

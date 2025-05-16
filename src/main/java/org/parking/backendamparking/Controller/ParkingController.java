@@ -43,6 +43,11 @@ public class ParkingController {
         return parkingService.getParkingsByUserId(userId);
     }
 
+    @GetMapping("/user/{userId}/year/{year}")
+    public List<ParkingDTOResponse> getParkingsByUserIdAndYear(@PathVariable Long userId, @PathVariable int year) {
+        return parkingService.getParkingsByUserIdAndYear(userId, year);
+    }
+
     @PostMapping("/add")
     public ParkingDTOResponse addParking(@RequestBody ParkingDTORequest parkingDTORequest) {
         return parkingService.addParking(parkingDTORequest);
