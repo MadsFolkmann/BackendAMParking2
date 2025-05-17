@@ -29,6 +29,7 @@ public class SecurityConfig {
 
                         /* Public Parking endpoints */
                         .requestMatchers(antMatcher("/parking")).permitAll()
+                        .requestMatchers(antMatcher("/parking/active/user/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/add")).permitAll()
                         .requestMatchers(antMatcher("/parking/update/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/delete/**")).permitAll()
