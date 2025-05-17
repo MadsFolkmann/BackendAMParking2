@@ -8,6 +8,7 @@ import org.parking.backendamparking.Repository.ParkingRepository;
 import org.parking.backendamparking.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,9 @@ public class ParkingService {
         Parking newParking = new Parking();
         newParking.setParea(request.getParea());
         newParking.setPlateNumber(request.getPlateNumber());
+        newParking.setCarBrand(request.getCarBrand());
+        newParking.setCarModel(request.getCarModel());
+        newParking.setCarColor(request.getCarColor());
         newParking.setStartTime(request.getStartTime());
         newParking.setEndTime(request.getEndTime());
         User user = userRepository.findById(request.getUserId()).orElseThrow();
@@ -72,6 +76,9 @@ public class ParkingService {
         Parking parking = parkingRepository.findById(id).orElseThrow();
         parking.setParea(request.getParea());
         parking.setPlateNumber(request.getPlateNumber());
+        parking.setCarBrand(request.getCarBrand());
+        parking.setCarModel(request.getCarModel());
+        parking.setCarColor(request.getCarColor());
         parking.setStartTime(request.getStartTime());
         parking.setEndTime(request.getEndTime());
         User user = userRepository.findById(request.getUserId()).orElseThrow();
@@ -92,6 +99,14 @@ public class ParkingService {
                 .filter(parking -> parking.getStartTime().getYear() == year)
                 .collect(Collectors.toList());
         return parkings.stream()
+                .map(ParkingDTOResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ParkingDTOResponse> getActiveParkingsByUserId(Long userId) {
+        LocalDateTime now = LocalDateTime.now();
+        List<Parking> activeParkings = parkingRepository.findByUserIdAndEndTimeAfterOrEndTimeIsNull(userId, now);
+        return activeParkings.stream()
                 .map(ParkingDTOResponse::new)
                 .collect(Collectors.toList());
     }

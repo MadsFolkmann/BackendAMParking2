@@ -13,6 +13,9 @@ import java.util.Date;
 public class ParkingDTORequest {
     private PArea parea;
     private String plateNumber;
+    private String carColor;
+    private String carBrand;
+    private String carModel;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long userId;

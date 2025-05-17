@@ -18,6 +18,9 @@ public class Parking {
     @JoinColumn(name = "parea_id")
     private PArea parea;
     private String plateNumber;
+    private String carColor;
+    private String carBrand;
+    private String carModel;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     @ManyToOne

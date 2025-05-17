@@ -38,6 +38,11 @@ public class ParkingController {
         return parkingService.getParkingByPlateNumber(plateNumber);
     }
 
+    @GetMapping("/active/user/{userId}")
+    public List<ParkingDTOResponse> getActiveParkingsByUserId(@PathVariable Long userId) {
+        return parkingService.getActiveParkingsByUserId(userId);
+    }
+
     @GetMapping("/user/{userId}")
     public List<ParkingDTOResponse> getParkingsByUserId(@PathVariable Long userId) {
         return parkingService.getParkingsByUserId(userId);

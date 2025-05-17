@@ -156,6 +156,9 @@ public class InitData implements CommandLineRunner {
         Parking parking1 = new Parking();
         parking1.setParea(pArea1Saved);
         parking1.setPlateNumber("123456L");
+        parking1.setCarBrand("Toyota");
+        parking1.setCarColor("Blue");
+        parking1.setCarModel("102");
         parking1.setUser(savedUser1);
         parking1.setStartTime(LocalDateTime.parse("2023-10-01 10:00:00", formatter));
         parking1.setEndTime(LocalDateTime.parse("2023-10-01 12:00:00", formatter));
@@ -165,6 +168,9 @@ public class InitData implements CommandLineRunner {
         Parking parking2 = new Parking();
         parking2.setParea(pArea2Saved);
         parking2.setPlateNumber("654321L");
+        parking2.setCarBrand("Mercedes");
+        parking2.setCarColor("Blue");
+        parking2.setCarModel("c3");
         parking2.setUser(savedUser2);
         parking2.setStartTime(LocalDateTime.parse("2023-10-01 11:00:00", formatter));
         parking2.setEndTime(LocalDateTime.parse("2023-10-01 13:00:00", formatter));
@@ -173,6 +179,9 @@ public class InitData implements CommandLineRunner {
         Parking parking3 = new Parking();
         parking3.setParea(pArea3Saved);
         parking3.setPlateNumber("789012L");
+        parking3.setCarBrand("BMW");
+        parking3.setCarColor("White");
+        parking3.setCarModel("X3");
         parking3.setUser(savedUser3);
         parking3.setStartTime(LocalDateTime.parse("2023-10-01 12:00:00", formatter));
         parking3.setEndTime(LocalDateTime.parse("2023-10-01 14:00:00", formatter));
