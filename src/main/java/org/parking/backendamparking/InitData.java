@@ -60,6 +60,11 @@ public class InitData implements CommandLineRunner {
         RentalUnit unit19 = new RentalUnit(1000000019L);
         RentalUnit unit20 = new RentalUnit(1000000020L);
 
+
+        /* Rental Units Admin */
+        RentalUnit adminUnit = new RentalUnit(1L);
+
+
         rentalUnitRepository.save(unit1);
         rentalUnitRepository.save(unit2);
         rentalUnitRepository.save(unit3);
@@ -82,10 +87,13 @@ public class InitData implements CommandLineRunner {
         rentalUnitRepository.save(unit20);
 
 
+        /* Rental Units admin*/
+        rentalUnitRepository.save(adminUnit);
+
 
         /* Users */
         User user1 = new User();
-        user1.setRentalUnit(1212323123L);
+        user1.setRentalUnit(1L);
         user1.setEmail("abdi@gmail.com");
         user1.setPassword(passwordEncoder.encode("password"));
         user1.setPhoneNumber(22232323);
@@ -127,6 +135,24 @@ public class InitData implements CommandLineRunner {
         User savedUser1 = userRepository.save(user1);
         User savedUser2 = userRepository.save(user2);
         User savedUser3 = userRepository.save(user3);
+
+
+        /* Admin */
+        User admin = new User();
+        admin.setRentalUnit(1212323123L);
+        admin.setEmail("admin@gmail.com");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setPhoneNumber(22232323);
+        admin.setFirstName("Admin");
+        admin.setLastName("Admin");
+        admin.setAdress("Admin Vej 1");
+        admin.setCity("Admin City");
+        admin.setZipCode(2610);
+        admin.setRole(Roles.ADMIN);
+
+        User savedAdmin = userRepository.save(admin);
+
+
 
 
         /* P-Area */
