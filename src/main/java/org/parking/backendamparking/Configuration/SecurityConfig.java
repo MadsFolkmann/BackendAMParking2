@@ -60,6 +60,9 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/pArea/{areaName}")).permitAll()
                         .requestMatchers(antMatcher("/pArea/{id}")).permitAll()
 
+                        /* Public RentalUnitEndpoint endpoints */
+                        .requestMatchers(antMatcher("/rentalUnit/check/**")).permitAll()
+
 
                         /* Swagger (API docs) */
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
