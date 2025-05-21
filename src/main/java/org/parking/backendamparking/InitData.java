@@ -130,11 +130,25 @@ public class InitData implements CommandLineRunner {
         user3.setRole(Roles.USER);
 
 
+        /* Users */
+        User user4 = new User();
+        user4.setRentalUnit(4112323123L);
+        user4.setEmail("dummy@gmail.com");
+        user4.setPassword(passwordEncoder.encode("dummy"));
+        user4.setPhoneNumber(2222222);
+        user4.setFirstName("Dummy");
+        user4.setLastName("User");
+        user4.setAdress("Vej 4");
+        user4.setCity("Hvidovre");
+        user4.setZipCode(2650);
+        user4.setRole(Roles.USER);
+
 
 
         User savedUser1 = userRepository.save(user1);
         User savedUser2 = userRepository.save(user2);
         User savedUser3 = userRepository.save(user3);
+        User savedUser4 = userRepository.save(user4);
 
 
         /* Admin */
