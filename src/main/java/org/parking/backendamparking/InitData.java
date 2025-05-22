@@ -119,16 +119,6 @@ public class InitData implements CommandLineRunner {
         user3.setAddress("Vej 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);
-        user3.setRole(Roles.USER);        User user3 = new User();
-        user3.setRentalUnit(3112323123L);
-        user3.setEmail("hej@123.dk");
-        user3.setPassword(passwordEncoder.encode("hej"));
-        user3.setPhoneNumber(2222222);
-        user3.setFirstName("Hej");
-        user3.setLastName("Dig");
-        user3.setAddress("Vej 3");
-        user3.setCity("Hvidovre");
-        user3.setZipCode(2650);
         user3.setRole(Roles.USER);
 
         //Pvagt role
