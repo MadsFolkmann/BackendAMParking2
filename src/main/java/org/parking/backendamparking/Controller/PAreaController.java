@@ -33,7 +33,7 @@ public class PAreaController {
         return pAreaService.getPAreaById(id);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public PAreaDTOResponse addPArea(@RequestBody PAreaDTOResponse request) {
         return pAreaService.addPArea(request);
     }

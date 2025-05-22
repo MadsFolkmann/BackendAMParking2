@@ -33,7 +33,7 @@ public class CarsController {
         return carsService.getCarsByUserId(userId);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public CarsDTOResponse addCar(@RequestBody CarsDTORequest request) {
         return carsService.addCar(request);
     }

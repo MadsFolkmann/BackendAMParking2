@@ -29,7 +29,7 @@ public class CasesController {
 
     
 
-    @PostMapping
+    @PostMapping("/add")
     public CasesDTOResponse addCase(@RequestBody CasesDTOResponse request) {
         return casesService.addCase(request);
     }
