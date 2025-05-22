@@ -13,7 +13,7 @@ public class UserDTORequest {
     private String email;
     private int phoneNumber;
     private Long rentalUnit;
-    private String adress;
+    private String address;
     private String city;
     private int zipCode;
     private Roles role;

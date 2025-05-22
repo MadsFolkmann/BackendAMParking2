@@ -91,7 +91,7 @@ public class InitData implements CommandLineRunner {
         user1.setPhoneNumber(22232323);
         user1.setFirstName("Abdi");
         user1.setLastName("Ox");
-        user1.setAdress("Vej 1");
+        user1.setAddress("Vej 1");
         user1.setCity("Rødovre");
         user1.setZipCode(2610);
         user1.setRole(Roles.USER);
@@ -103,7 +103,7 @@ public class InitData implements CommandLineRunner {
         user2.setPhoneNumber(2222222);
         user2.setFirstName("Mads");
         user2.setLastName("Diaz");
-        user2.setAdress("Vej 2");
+        user2.setAddress("Vej 2");
         user2.setCity("Hvidovre");
         user2.setZipCode(2650);
         user2.setRole(Roles.USER);
@@ -116,7 +116,7 @@ public class InitData implements CommandLineRunner {
         user3.setPhoneNumber(2222222);
         user3.setFirstName("Hej");
         user3.setLastName("Dig");
-        user3.setAdress("Vej 3");
+        user3.setAddress("Vej 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);
         user3.setRole(Roles.USER);

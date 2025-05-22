@@ -16,7 +16,7 @@ public class UserDTOResponse {
     private String email;
     private int phoneNumber;
     private Long rentalUnit;
-    private String adress;
+    private String address;
     private String city;
     private int zipCode;
     private Roles role;
@@ -29,7 +29,7 @@ public class UserDTOResponse {
         this.email = user.getEmail();
         this.phoneNumber = user.getPhoneNumber();
         this.rentalUnit = user.getRentalUnit();
-        this.adress = user.getAdress();
+        this.address = user.getAddress();
         this.city = user.getCity();
         this.zipCode = user.getZipCode();
         this.role = user.getRole();
