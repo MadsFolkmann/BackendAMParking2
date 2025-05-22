@@ -11,5 +11,6 @@ public class CaseDTORequest {
     private Long id;
     private LocalDate time;
     private String description;
+    private Boolean done;
     private Long userId;
 }

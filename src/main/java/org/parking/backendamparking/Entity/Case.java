@@ -17,6 +17,7 @@ public class Case {
     private Long id;
     private LocalDate time;
     private String description;
+    private Boolean done;
     @ManyToOne
     @JoinColumn(name = "pvagt_id", nullable = false)
     private User user;

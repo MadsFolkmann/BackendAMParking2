@@ -15,6 +15,7 @@ public class CaseDTOResponse {
     private Long id;
     private LocalDate time;
     private String description;
+    private Boolean done;
     private UserDTOResponse user;
 
 

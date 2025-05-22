@@ -52,6 +52,7 @@ public class CaseService {
         Case newCase = new Case();
         newCase.setTime(request.getTime());
         newCase.setDescription(request.getDescription());
+        newCase.setDone(request.getDone());
 
         // Map userId to User entity
         User user = userRepository.findById(request.getUserId())
@@ -69,6 +70,7 @@ public class CaseService {
 
         existingCase.setTime(request.getTime());
         existingCase.setDescription(request.getDescription());
+        existingCase.setDone(request.getDone());
 
         // Map userId to User entity
         if (request.getUserId() != null) {
