@@ -67,7 +67,7 @@ public class UserService {
         newUser.setEmail(request.getEmail());
         newUser.setPhoneNumber(request.getPhoneNumber());
         newUser.setRentalUnit(request.getRentalUnit());
-        newUser.setAdress(request.getAdress());
+        newUser.setAddress(request.getAddress());
         newUser.setCity(request.getCity());
         newUser.setZipCode(request.getZipCode());
         newUser.setRole(Optional.ofNullable(request.getRole()).orElse(Roles.USER));
@@ -109,7 +109,7 @@ public class UserService {
         }
         user.setRentalUnit(request.getRentalUnit());
 
-        user.setAdress(request.getAdress());
+        user.setAddress(request.getAddress());
         user.setCity(request.getCity());
         user.setZipCode(request.getZipCode());
 

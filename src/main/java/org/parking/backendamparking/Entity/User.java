@@ -21,7 +21,7 @@ public class User {
     private int phoneNumber;
     @Column(nullable = false, unique = true)
     private Long rentalUnit;
-    private String adress;
+    private String address;
     private String city;
     private int zipCode;
     @Enumerated(EnumType.STRING)
@@ -32,14 +32,14 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, int phoneNumber, Long rentalUnit, String adress, String city, int zipCode) {
+    public User(String firstName, String lastName, String email, String password, int phoneNumber, Long rentalUnit, String address, String city, int zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.rentalUnit = this.rentalUnit;
-        this.adress = adress;
+        this.address = address;
         this.city = city;
         this.zipCode = zipCode;
     }
