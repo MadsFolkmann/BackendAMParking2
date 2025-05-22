@@ -17,17 +17,17 @@ public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ParkingRepository parkingRepository;
     private final CarsRepository carsRepository;
-    private final CasesRepository casesRepository;
+    private final CaseRepository caseRepository;
     private final PAreaRepository pAreaRepository;
     private final RentalUnitRepository rentalUnitRepository;
     private final PasswordEncoder passwordEncoder;
 
 
-    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CasesRepository casesRepository, PAreaRepository pAreaRepository, RentalUnitRepository rentalUnitRepository, PasswordEncoder passwordEncoder) {
+    public InitData(UserRepository userRepository, ParkingRepository parkingRepository, CarsRepository carsRepository, CaseRepository caseRepository, PAreaRepository pAreaRepository, RentalUnitRepository rentalUnitRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.parkingRepository = parkingRepository;
         this.carsRepository = carsRepository;
-        this.casesRepository = casesRepository;
+        this.caseRepository = caseRepository;
         this.pAreaRepository = pAreaRepository;
         this.rentalUnitRepository = rentalUnitRepository;
         this.passwordEncoder = passwordEncoder;
@@ -135,40 +135,26 @@ public class InitData implements CommandLineRunner {
         user4.setRole(Roles.PVAGT);
 
         //Admin role
-        User user5 = new User();
-        user5.setRentalUnit(5112323123L);
-        user5.setEmail("admin@gmail.com");
-        user5.setPassword(passwordEncoder.encode("password"));
-        user5.setPhoneNumber(2222222);
-        user5.setFirstName("Admin");
-        user5.setLastName("1");
-        user5.setAddress("Vej 5");
-        user5.setCity("Hvidovre");
-        user5.setZipCode(2650);
-        user5.setRole(Roles.ADMIN);
 
         User admin = new User();
-        admin.setRentalUnit(4112323123L);
+        admin.setRentalUnit(4112353123L);
         admin.setEmail("admin@gmail.com");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setPhoneNumber(2222222);
         admin.setFirstName("Admin");
         admin.setLastName("Admin");
-        admin.setAdress("Vej 4");
+        admin.setAddress("Vej 4");
         admin.setCity("Hvidovre");
         admin.setZipCode(2650);
         admin.setRole(Roles.ADMIN);
         User adminSaved = userRepository.save(admin);
 
 
-
-
-
         User savedUser1 = userRepository.save(user1);
         User savedUser2 = userRepository.save(user2);
         User savedUser3 = userRepository.save(user3);
         User savedUser4 = userRepository.save(user4);
-        User savedUser5 = userRepository.save(user5);
+
 
 
         /* P-Area */
@@ -266,15 +252,17 @@ public class InitData implements CommandLineRunner {
 
 
         /* Cases */
-         Cases cases1 = new Cases();
-        cases1.setTime(LocalDate.from(LocalDateTime.parse("2023-10-01 10:00:00", formatter)));
-        cases1.setDescription("Overholdt ikke tidsfristen for parkering");
-        Cases cases1Saved = casesRepository.save(cases1);
+         Case case1 = new Case();
+        case1.setTime(LocalDate.from(LocalDateTime.parse("2025-10-01 10:00:00", formatter)));
+        case1.setDescription("Overholdt ikke tidsfristen for parkering");
+        case1.setUser(user4);
+        Case case1Saved = caseRepository.save(case1);
 
-        Cases cases2 = new Cases();
-        cases2.setTime(LocalDate.from(LocalDateTime.parse("2023-10-01 11:00:00", formatter)));
-        cases2.setDescription("Overholdt ikke tidsfristen for parkering");
-        Cases cases2Saved = casesRepository.save(cases2);
+        Case case2 = new Case();
+        case2.setTime(LocalDate.from(LocalDateTime.parse("2025-10-01 11:00:00", formatter)));
+        case2.setDescription("Overholdt ikke tidsfristen for parkering");
+        case2.setUser(user4);
+        Case case2Saved = caseRepository.save(case2);
 
 
 

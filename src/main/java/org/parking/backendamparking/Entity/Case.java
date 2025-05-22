@@ -10,11 +10,14 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-public class Cases {
+@Table(name = "`case`") // Escaping the table name
+public class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate time;
     private String description;
-
+    @ManyToOne
+    @JoinColumn(name = "pvagt_id", nullable = false)
+    private User user;
 }

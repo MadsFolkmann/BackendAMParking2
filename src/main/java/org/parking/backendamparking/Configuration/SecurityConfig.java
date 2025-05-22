@@ -46,11 +46,11 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
 
                         /* Public Cases endpoints */
-                        .requestMatchers(antMatcher("/cases")).permitAll()
-                        .requestMatchers(antMatcher("/cases/add")).permitAll()
-                        .requestMatchers(antMatcher("/cases/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/cases/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/cases/user/**")).permitAll()
+                        .requestMatchers(antMatcher("/case")).permitAll()
+                        .requestMatchers(antMatcher("/case/add")).permitAll()
+                        .requestMatchers(antMatcher("/case/update/**")).permitAll()
+                        .requestMatchers(antMatcher("/case/delete/**")).permitAll()
+                        .requestMatchers(antMatcher("/case/user/**")).permitAll()
 
                         /* Public PArea endpoints */
                         .requestMatchers(antMatcher("/pArea")).permitAll()
