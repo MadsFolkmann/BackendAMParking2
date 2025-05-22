@@ -38,8 +38,8 @@ public class CarsService {
     }
 
     /* Get Car By Plate Number */
-    public CarsDTOResponse getCarByPlateNumber(String numberPlate) {
-        Cars car = carsRepository.findByNumberPlate(numberPlate);
+    public CarsDTOResponse getCarByPlateNumber(String registrationNumber) {
+        Cars car = carsRepository.findByregistrationNumber(registrationNumber);
         return new CarsDTOResponse(car);
     }
 
@@ -47,15 +47,16 @@ public class CarsService {
     public CarsDTOResponse addCar(CarsDTORequest request) {
         Cars newCar = new Cars();
 
-        newCar.setNumberPlate(request.getNumberPlate());
-        newCar.setBrand(request.getBrand());
+
+        newCar.setRegistrationNumber(request.getRegistrationNumber());
+        newCar.setMake(request.getMake());
         newCar.setModel(request.getModel());
-        newCar.setYear(request.getYear());
+        newCar.setModelYear(request.getModelYear());
         newCar.setColor(request.getColor());
         newCar.setType(request.getType());
+        newCar.setTotalWeight(request.getTotalWeight());
         newCar.setDescription(request.getDescription());
 
-        // Hent bruger via userId og tilknyt bilen
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -71,12 +72,13 @@ public class CarsService {
         Cars car = carsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        car.setNumberPlate(request.getNumberPlate());
-        car.setBrand(request.getBrand());
+        car.setRegistrationNumber(request.getRegistrationNumber());
+        car.setMake(request.getMake());
         car.setModel(request.getModel());
-        car.setYear(request.getYear());
+        car.setModelYear(request.getModelYear());
         car.setColor(request.getColor());
         car.setType(request.getType());
+        car.setTotalWeight(request.getTotalWeight());
         car.setDescription(request.getDescription());
 
         carsRepository.save(car);

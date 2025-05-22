@@ -108,20 +108,35 @@ public class InitData implements CommandLineRunner {
 
         /* Cars */
         Cars cars1 = new Cars();
-        cars1.setNumberPlate("123456L");
-        cars1.setBrand("Toyota");
+        cars1.setRegistrationNumber("123456L");
+        cars1.setMake("Toyota");
         cars1.setModel("Corolla");
         cars1.setColor("Red");
+        cars1.setType("Sedan");
+        cars1.setTotalWeight(1500);
         cars1.setUser(user1);
         Cars cars1Saved = carsRepository.save(cars1);
 
         Cars cars2 = new Cars();
-        cars2.setNumberPlate("654321L");
-        cars2.setBrand("Honda");
+        cars2.setRegistrationNumber("654321L");
+        cars2.setMake("Honda");
         cars2.setModel("Civic");
         cars2.setColor("Blue");
+        cars2.setType("Sedan");
+        cars2.setTotalWeight(1600);
         cars2.setUser(user2);
         Cars cars2Saved = carsRepository.save(cars2);
+
+
+        Cars cars3 = new Cars();
+        cars3.setRegistrationNumber("789012L");
+        cars3.setMake("Ford");
+        cars3.setModel("Focus");
+        cars3.setColor("Green");
+        cars3.setType("Hatchback");
+        cars3.setTotalWeight(1700);
+        cars3.setUser(user3);
+        Cars cars3Saved = carsRepository.save(cars3);
 
 
 

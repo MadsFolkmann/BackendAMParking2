@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ParkingRepository extends JpaRepository<Parking, Long> {
-    Parking findByPlateNumber(String plateNumber);
+    Parking findByPlateNumber(String registration_number);
     List<Parking> findAll();
 
 }

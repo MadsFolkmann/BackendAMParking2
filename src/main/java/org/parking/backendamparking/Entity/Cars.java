@@ -11,12 +11,13 @@ public class Cars {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String numberPlate;
-    private String brand;
+    private String registrationNumber;
+    private String make;
     private String model;
-    private int year;
+    private int modelYear;
     private String color;
     private String type;
+    private int totalWeight;
     private String description;
 
     @ManyToOne
@@ -26,13 +27,14 @@ public class Cars {
     public Cars() {
     }
 
-    public Cars(String numberPlate, String brand, String model, int year, String color, String type, String description) {
-        this.numberPlate = numberPlate;
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.color = color;
-        this.type = type;
-        this.description = description;
+    public Cars(Cars cars) {
+        this.registrationNumber = cars.getRegistrationNumber();
+        this.make = cars.getMake();
+        this.model = cars.getModel();
+        this.modelYear = cars.getModelYear();
+        this.color = cars.getColor();
+        this.type = cars.getType();
+        this.totalWeight = cars.getTotalWeight();
+        this.description = cars.getDescription();
     }
 }

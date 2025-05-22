@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CarsRepository extends JpaRepository<Cars, Long> {
     List<Cars> findAll();
-    Cars findByNumberPlate(String numberPlate);
+    Cars findByregistrationNumber(String registrationNumber);
     List<Cars> findByUser(User user);
 }

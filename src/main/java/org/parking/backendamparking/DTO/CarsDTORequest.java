@@ -2,30 +2,36 @@ package org.parking.backendamparking.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.parking.backendamparking.Entity.Cars;
 
 @Getter
 @Setter
 public class CarsDTORequest {
     private Long id;
-    private String numberPlate;
-    private String brand;
+    private String registrationNumber;
+    private String make;
     private String model;
-    private int year;
+    private int modelYear;
     private String color;
     private String type;
+    private int totalWeight;
     private String description;
     private Long userId;
 
     public CarsDTORequest() {
     }
 
-    public CarsDTORequest(String numberPlate, String brand, String model, int year, String color, String type, String description) {
-        this.numberPlate = numberPlate;
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.color = color;
-        this.type = type;
-        this.description = description;
+    public CarsDTORequest(Cars cars) {
+        this.id = cars.getId();
+        this.registrationNumber = cars.getRegistrationNumber();
+        this.make = cars.getMake();
+        this.model = cars.getModel();
+        this.modelYear = cars.getModelYear();
+        this.color = cars.getColor();
+        this.type = cars.getType();
+        this.totalWeight = cars.getTotalWeight();
+        this.description = cars.getDescription();
+        this.userId = cars.getUser().getId();
+
     }
 }

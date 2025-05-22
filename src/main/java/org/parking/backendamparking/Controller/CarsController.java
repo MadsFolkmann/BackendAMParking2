@@ -23,9 +23,9 @@ public class CarsController {
         return carsService.getAllCars();
     }
 
-    @GetMapping("/plate/{numberPlate}")
-    public CarsDTOResponse getCarByPlateNumber(@PathVariable String numberPlate) {
-        return carsService.getCarByPlateNumber(numberPlate);
+    @GetMapping("/plate/{registration_number}")
+    public CarsDTOResponse getCarByPlateNumber(@PathVariable String registrationNumber) {
+        return carsService.getCarByPlateNumber(registrationNumber);
     }
 
     @GetMapping("/user/{userId}")
