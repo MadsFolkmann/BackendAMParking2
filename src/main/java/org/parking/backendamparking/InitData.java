@@ -119,14 +119,51 @@ public class InitData implements CommandLineRunner {
         user3.setAddress("Vej 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);
+        user3.setRole(Roles.USER);        User user3 = new User();
+        user3.setRentalUnit(3112323123L);
+        user3.setEmail("hej@123.dk");
+        user3.setPassword(passwordEncoder.encode("hej"));
+        user3.setPhoneNumber(2222222);
+        user3.setFirstName("Hej");
+        user3.setLastName("Dig");
+        user3.setAddress("Vej 3");
+        user3.setCity("Hvidovre");
+        user3.setZipCode(2650);
         user3.setRole(Roles.USER);
 
+        //Pvagt role
+        User user4 = new User();
+        user4.setRentalUnit(4112323123L);
+        user4.setEmail("pvagt@gmail.com");
+        user4.setPassword(passwordEncoder.encode("password"));
+        user4.setPhoneNumber(2222222);
+        user4.setFirstName("P-vagt");
+        user4.setLastName("1");
+        user4.setAddress("Vej 4");
+        user4.setCity("Hvidovre");
+        user4.setZipCode(2650);
+        user4.setRole(Roles.PVAGT);
+
+        //Admin role
+        User user5 = new User();
+        user5.setRentalUnit(5112323123L);
+        user5.setEmail("admin@gmail.com");
+        user5.setPassword(passwordEncoder.encode("password"));
+        user5.setPhoneNumber(2222222);
+        user5.setFirstName("Admin");
+        user5.setLastName("1");
+        user5.setAddress("Vej 5");
+        user5.setCity("Hvidovre");
+        user5.setZipCode(2650);
+        user5.setRole(Roles.ADMIN);
 
 
 
         User savedUser1 = userRepository.save(user1);
         User savedUser2 = userRepository.save(user2);
         User savedUser3 = userRepository.save(user3);
+        User savedUser4 = userRepository.save(user4);
+        User savedUser5 = userRepository.save(user5);
 
 
         /* P-Area */
