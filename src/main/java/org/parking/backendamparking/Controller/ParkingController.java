@@ -1,7 +1,10 @@
 package org.parking.backendamparking.Controller;
 
 
+import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
+import org.parking.backendamparking.DTO.ParkingDTORequest;
+import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Service.ParkingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,19 +38,29 @@ public class ParkingController {
         return parkingService.getParkingByPlateNumber(plateNumber);
     }
 
+    @GetMapping("/active/user/{userId}")
+    public List<ParkingDTOResponse> getActiveParkingsByUserId(@PathVariable Long userId) {
+        return parkingService.getActiveParkingsByUserId(userId);
+    }
+
     @GetMapping("/user/{userId}")
     public List<ParkingDTOResponse> getParkingsByUserId(@PathVariable Long userId) {
         return parkingService.getParkingsByUserId(userId);
     }
 
-    @PostMapping(("/"))
-    public ParkingDTOResponse addParking(@RequestBody ParkingDTOResponse parkingDTOResponse) {
-        return parkingService.addParking(parkingDTOResponse);
+    @GetMapping("/user/{userId}/year/{year}")
+    public List<ParkingDTOResponse> getParkingsByUserIdAndYear(@PathVariable Long userId, @PathVariable int year) {
+        return parkingService.getParkingsByUserIdAndYear(userId, year);
+    }
+
+    @PostMapping("/add")
+    public ParkingDTOResponse addParking(@RequestBody ParkingDTORequest parkingDTORequest) {
+        return parkingService.addParking(parkingDTORequest);
     }
 
     @PutMapping("/{id}")
-    public ParkingDTOResponse updateParking(@PathVariable Long id, @RequestBody ParkingDTOResponse parkingDTOResponse) {
-        return parkingService.updateParking(id, parkingDTOResponse);
+    public ParkingDTOResponse updateParking(@PathVariable Long id, @RequestBody ParkingDTORequest parkingDTORequest) {
+        return parkingService.updateParking(id, parkingDTORequest);
     }
 
     @DeleteMapping("/{id}")

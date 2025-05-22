@@ -14,8 +14,13 @@ public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String pArea;
+    @ManyToOne
+    @JoinColumn(name = "parea_id")
+    private PArea parea;
     private String plateNumber;
+    private String carColor;
+    private String carBrand;
+    private String carModel;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     @ManyToOne

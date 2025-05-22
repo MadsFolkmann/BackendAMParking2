@@ -1,5 +1,6 @@
 package org.parking.backendamparking.Service;
 
+import org.parking.backendamparking.DTO.ParkingDTORequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
 import org.parking.backendamparking.Entity.Parking;
 import org.parking.backendamparking.Entity.User;
@@ -7,6 +8,7 @@ import org.parking.backendamparking.Repository.ParkingRepository;
 import org.parking.backendamparking.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,10 +56,13 @@ public class ParkingService {
     }
 
     /* Add Parking */
-    public ParkingDTOResponse addParking(ParkingDTOResponse request) {
+    public ParkingDTOResponse addParking(ParkingDTORequest request) {
         Parking newParking = new Parking();
-        newParking.setPArea(request.getPArea());
+        newParking.setParea(request.getParea());
         newParking.setPlateNumber(request.getPlateNumber());
+        newParking.setCarBrand(request.getCarBrand());
+        newParking.setCarModel(request.getCarModel());
+        newParking.setCarColor(request.getCarColor());
         newParking.setStartTime(request.getStartTime());
         newParking.setEndTime(request.getEndTime());
         User user = userRepository.findById(request.getUserId()).orElseThrow();
@@ -67,10 +72,13 @@ public class ParkingService {
     }
 
     /* Update Parking */
-    public ParkingDTOResponse updateParking(Long id, ParkingDTOResponse request) {
+    public ParkingDTOResponse updateParking(Long id, ParkingDTORequest request) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
-        parking.setPArea(request.getPArea());
+        parking.setParea(request.getParea());
         parking.setPlateNumber(request.getPlateNumber());
+        parking.setCarBrand(request.getCarBrand());
+        parking.setCarModel(request.getCarModel());
+        parking.setCarColor(request.getCarColor());
         parking.setStartTime(request.getStartTime());
         parking.setEndTime(request.getEndTime());
         User user = userRepository.findById(request.getUserId()).orElseThrow();
@@ -83,5 +91,23 @@ public class ParkingService {
     public void deleteParking(Long id) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
         parkingRepository.delete(parking);
+    }
+
+    public List<ParkingDTOResponse> getParkingsByUserIdAndYear(Long userId, int year) {
+        List<Parking> parkings = parkingRepository.findAll().stream()
+                .filter(parking -> parking.getUser() != null && parking.getUser().getId().equals(userId))
+                .filter(parking -> parking.getStartTime().getYear() == year)
+                .collect(Collectors.toList());
+        return parkings.stream()
+                .map(ParkingDTOResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ParkingDTOResponse> getActiveParkingsByUserId(Long userId) {
+        LocalDateTime now = LocalDateTime.now();
+        List<Parking> activeParkings = parkingRepository.findByUserIdAndEndTimeAfterOrEndTimeIsNull(userId, now);
+        return activeParkings.stream()
+                .map(ParkingDTOResponse::new)
+                .collect(Collectors.toList());
     }
 }

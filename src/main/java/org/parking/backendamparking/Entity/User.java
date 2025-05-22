@@ -1,12 +1,9 @@
 package org.parking.backendamparking.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.parking.backendamparking.Roles;
 
 @Getter
 @Setter
@@ -16,7 +13,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
     private String password;
@@ -26,14 +24,17 @@ public class User {
     private String adress;
     private String city;
     private int zipCode;
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
 
 
     public User() {
     }
 
-    public User(String name, String email, String password, int phoneNumber, Long rentalUnit, String adress, String city, int zipCode) {
-        this.name = name;
+    public User(String firstName, String lastName, String email, String password, int phoneNumber, Long rentalUnit, String adress, String city, int zipCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;

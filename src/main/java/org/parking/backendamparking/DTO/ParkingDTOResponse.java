@@ -1,9 +1,11 @@
 package org.parking.backendamparking.DTO;
 
 
+import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.parking.backendamparking.Entity.PArea;
 import org.parking.backendamparking.Entity.Parking;
 
 import java.time.LocalDateTime;
@@ -14,8 +16,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class ParkingDTOResponse {
     private Long id;
-    private String pArea;
+    private PArea parea;
     private String plateNumber;
+    private String carColor;
+    private String carBrand;
+    private String carModel;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Long userId;
@@ -23,12 +28,15 @@ public class ParkingDTOResponse {
 
     public ParkingDTOResponse(Parking parking) {
         this.id = parking.getId();
-        this.pArea = parking.getPArea();
+        this.parea = parking.getParea();
         this.plateNumber = parking.getPlateNumber();
+        this.carColor = parking.getCarColor();
+        this.carBrand = parking.getCarBrand();
+        this.carModel = parking.getCarModel();
         this.startTime = parking.getStartTime();
         this.endTime = parking.getEndTime();
         this.userId = parking.getUser() != null ? parking.getUser().getId() : null;
-        this.userName = parking.getUser() != null ? parking.getUser().getName() : null;
+        this.userName = parking.getUser() != null ? parking.getUser().getFirstName() : null;
     }
 }
 
