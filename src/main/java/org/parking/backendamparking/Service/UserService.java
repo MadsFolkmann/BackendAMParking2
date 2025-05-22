@@ -3,6 +3,7 @@ package org.parking.backendamparking.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
+import org.parking.backendamparking.DTO.UserUpdateDTO;
 import org.parking.backendamparking.Entity.User;
 import org.parking.backendamparking.Repository.UserRepository;
 import org.parking.backendamparking.Repository.RentalUnitRepository;
@@ -89,25 +90,15 @@ public class UserService {
     }
 
     /*  Update User  */
-    public UserDTOResponse updateUser(Long id, UserDTORequest request) {
+    public UserDTOResponse updateUser(Long id, UserUpdateDTO request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
 
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
 
-        // Kun opdater kodeord hvis det er angivet og anderledes
-        if (request.getPassword() != null && !request.getPassword().isBlank()) {
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
-        }
-
         user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
-
-        if (!rentalUnitRepository.existsById(request.getRentalUnit())) {
-            throw new EntityNotFoundException("Rental unit does not exist: " + request.getRentalUnit());
-        }
-        user.setRentalUnit(request.getRentalUnit());
 
         user.setAddress(request.getAddress());
         user.setCity(request.getCity());

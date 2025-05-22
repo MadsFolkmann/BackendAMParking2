@@ -3,6 +3,7 @@ package org.parking.backendamparking.Controller;
 import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
+import org.parking.backendamparking.DTO.UserUpdateDTO;
 import org.parking.backendamparking.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,8 +48,8 @@ public class UserController {
 
 
     @PutMapping("/update/{id}")
-     public UserDTOResponse updateUser(@PathVariable Long id, @RequestBody UserDTORequest userDTORequest) {
-         return userService.updateUser(id, userDTORequest);
+     public UserDTOResponse updateUser(@PathVariable Long id, @RequestBody UserUpdateDTO userUpdateDTO) {
+         return userService.updateUser(id, userUpdateDTO);
      }
 
      @DeleteMapping("/delete/{id}")
