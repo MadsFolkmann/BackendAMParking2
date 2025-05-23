@@ -137,7 +137,7 @@ public class InitData implements CommandLineRunner {
         //Admin role
 
         User admin = new User();
-        admin.setRentalUnit(4112353123L);
+        admin.setRentalUnit(1000000004L);
         admin.setEmail("admin@gmail.com");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setPhoneNumber(2222222);
