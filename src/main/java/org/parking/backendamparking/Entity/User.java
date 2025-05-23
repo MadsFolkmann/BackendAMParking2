@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.parking.backendamparking.Roles;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -26,6 +28,14 @@ public class User {
     private int zipCode;
     @Enumerated(EnumType.STRING)
     private Roles role;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Parking> parkings;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cars> cars;
 
 
 
