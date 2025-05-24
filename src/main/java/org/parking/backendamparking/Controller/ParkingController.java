@@ -53,6 +53,12 @@ public class ParkingController {
         return parkingService.getParkingsByUserIdAndYear(userId, year);
     }
 
+    // ParkingController.java
+    @GetMapping("/active/plateNumber/{plateNumber}")
+    public boolean hasActiveParkingByPlateNumber(@PathVariable String plateNumber) {
+        return parkingService.hasActiveParkingByPlateNumber(plateNumber);
+    }
+
     @PostMapping("/add")
     public ParkingDTOResponse addParking(@RequestBody ParkingDTORequest parkingDTORequest) {
         return parkingService.addParking(parkingDTORequest);

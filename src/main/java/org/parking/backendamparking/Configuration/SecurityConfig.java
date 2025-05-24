@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/parking/plateNumber/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/user/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/{id}")).permitAll()
+                        .requestMatchers(antMatcher("/parking/active/plateNumber/**")).permitAll()
 
                         /* Public Cars endpoints */
                         .requestMatchers(antMatcher("/cars")).permitAll()
@@ -73,7 +74,7 @@ public class SecurityConfig {
                         /* All other requests require authentication */
                         .anyRequest().authenticated()
                 )
-                .httpBasic(); // Bruger Basic Auth (ingen login-form)
+                .httpBasic();
 
         return http.build();
     }

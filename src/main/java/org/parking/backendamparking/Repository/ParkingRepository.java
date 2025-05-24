@@ -13,5 +13,8 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
     Parking findByPlateNumber(String registration_number);
     List<Parking> findAll();
     List<Parking> findByUserIdAndEndTimeAfterOrEndTimeIsNull(Long userId, LocalDateTime now);
+    // ParkingRepository.java
+    List<Parking> findByPlateNumberAndEndTimeAfterOrPlateNumberAndEndTimeIsNull(String plateNumber1, LocalDateTime now, String plateNumber2);
+
 }
 

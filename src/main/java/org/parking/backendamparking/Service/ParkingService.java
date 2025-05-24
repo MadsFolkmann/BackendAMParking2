@@ -55,6 +55,13 @@ public class ParkingService {
         return new ParkingDTOResponse(parking);
     }
 
+    // ParkingService.java
+    public boolean hasActiveParkingByPlateNumber(String plateNumber) {
+        LocalDateTime now = LocalDateTime.now();
+        List<Parking> activeParkings = parkingRepository.findByPlateNumberAndEndTimeAfterOrPlateNumberAndEndTimeIsNull(plateNumber, now, plateNumber);
+        return !activeParkings.isEmpty();
+    }
+
     /* Add Parking */
     public ParkingDTOResponse addParking(ParkingDTORequest request) {
         Parking newParking = new Parking();

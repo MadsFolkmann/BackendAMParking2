@@ -212,7 +212,7 @@ public class InitData implements CommandLineRunner {
         parking3.setCarModel("X3");
         parking3.setUser(savedUser3);
         parking3.setStartTime(LocalDateTime.parse("2023-10-01 12:00:00", formatter));
-        parking3.setEndTime(LocalDateTime.parse("2023-10-01 14:00:00", formatter));
+        parking3.setEndTime(LocalDateTime.parse("2026-10-01 14:00:00", formatter));
         Parking parking3Saved = parkingRepository.save(parking3);
 
 
