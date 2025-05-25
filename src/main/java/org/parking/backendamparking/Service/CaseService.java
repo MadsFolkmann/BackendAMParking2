@@ -50,6 +50,7 @@ public class CaseService {
     /* Add Case */
     public CaseDTOResponse addCase(CaseDTORequest request) {
         Case newCase = new Case();
+        newCase.setPlateNumber(request.getPlateNumber());
         newCase.setTime(request.getTime());
         newCase.setDescription(request.getDescription());
         newCase.setDone(request.getDone());
@@ -68,6 +69,7 @@ public class CaseService {
         Case existingCase = caseRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Case not found with id: " + id));
 
+        existingCase.setPlateNumber(request.getPlateNumber());
         existingCase.setTime(request.getTime());
         existingCase.setDescription(request.getDescription());
         existingCase.setDone(request.getDone());

@@ -15,6 +15,7 @@ public class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String plateNumber;
     private LocalDate time;
     private String description;
     private Boolean done;

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CaseDTOResponse {
     private Long id;
+    private String plateNumber;
     private LocalDate time;
     private String description;
     private Boolean done;
@@ -21,6 +22,7 @@ public class CaseDTOResponse {
 
     public CaseDTOResponse(Case aCase){
         this.id = aCase.getId();
+        this.plateNumber = aCase.getPlateNumber();
         this.time = aCase.getTime();
         this.description = aCase.getDescription();
         this.user = new UserDTOResponse(aCase.getUser());

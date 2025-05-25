@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class CaseDTORequest {
     private Long id;
+    private String plateNumber;
     private LocalDate time;
     private String description;
     private Boolean done;
