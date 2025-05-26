@@ -23,6 +23,11 @@ public class CaseService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Get All Cases
+     * @return List of CaseDTOResponse
+     */
+
     /* Get All Cases */
     public List<CaseDTOResponse> getAllCases() {
         List<Case> allCases = caseRepository.findAll();
@@ -31,13 +36,24 @@ public class CaseService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get Cases By Case ID
+     * @param id the ID of the case to be retrieved
+     * @return CaseDTOResponse
+     */
+
     /* Get Cases By Case ID */
     public CaseDTOResponse getCasesById(Long id) {
         Case aCase = caseRepository.findById(id).orElse(null);
         return new CaseDTOResponse(aCase);
     }
 
-    /* Get Cases By user ID */
+    /**
+     * Get Cases By User ID
+     * @param userId the ID of the user whose cases are to be retrieved
+     * @return List of CaseDTOResponse
+     */
+
     /* Get Cases By user ID */
     public List<CaseDTOResponse> getCasesByUserId(long userId) {
         List<Case> cases = caseRepository.findAllByUser_Id(userId);
@@ -45,6 +61,12 @@ public class CaseService {
                 .map(CaseDTOResponse::new)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Add Case
+     * @param request the request containing case details
+     * @return CaseDTOResponse
+     */
 
 
     /* Add Case */
@@ -64,6 +86,13 @@ public class CaseService {
         return new CaseDTOResponse(newCase);
     }
 
+    /**
+     * Update Case
+     * @param id the ID of the case to be updated
+     * @param request the request containing updated case details
+     * @return CaseDTOResponse
+     */
+
     /* Update Case */
     public CaseDTOResponse updateCase(Long id, CaseDTORequest request) {
         Case existingCase = caseRepository.findById(id)
@@ -74,7 +103,6 @@ public class CaseService {
         existingCase.setDescription(request.getDescription());
         existingCase.setDone(request.getDone());
 
-        // Map userId to User entity
         if (request.getUserId() != null) {
             User user = userRepository.findById(request.getUserId())
                     .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + request.getUserId()));
@@ -84,6 +112,11 @@ public class CaseService {
         caseRepository.save(existingCase);
         return new CaseDTOResponse(existingCase);
     }
+
+    /**
+     * Delete Case
+     * @param id the ID of the case to be deleted
+     */
 
     /* Delete Case */
     public void deleteCase (Long id){

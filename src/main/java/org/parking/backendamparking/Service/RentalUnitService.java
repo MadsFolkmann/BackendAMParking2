@@ -12,6 +12,12 @@ public class RentalUnitService {
         this.rentalUnitRepository = rentalUnitRepository;
     }
 
+    /**
+     * Check if a rental unit exists by its unit number.
+     * @param unitNumber the unit number of the rental unit
+     * @return true if the rental unit exists, false otherwise
+     */
+
     public boolean checkRentalUnit(Long unitNumber) {
         return rentalUnitRepository.existsByUnitNumber(unitNumber);
     }

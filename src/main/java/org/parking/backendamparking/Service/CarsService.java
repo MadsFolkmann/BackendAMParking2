@@ -22,11 +22,22 @@ public class CarsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Get All Cars
+     * @return List of CarsDTOResponse
+     * This method retrieves all cars from the repository,
+     */
     /* Get All Cars */
     public List<CarsDTOResponse> getAllCars() {
         List<Cars> allCars = carsRepository.findAll();
         return allCars.stream().map(CarsDTOResponse::new).collect(Collectors.toList());
     }
+
+    /**
+     * Get Cars By User ID
+     * @param userId the ID of the user whose cars are to be retrieved
+     * @return List of CarsDTOResponse
+     */
 
     /* Get Cars By User ID */
     public List<CarsDTOResponse> getCarsByUserId(Long userId) {
@@ -37,11 +48,25 @@ public class CarsService {
         return cars.stream().map(CarsDTOResponse::new).collect(Collectors.toList());
     }
 
+    /**
+     * Get Car By Plate Number
+     * @param registrationNumber the registration number of the car to be retrieved
+     * @return CarsDTOResponse
+     */
+
     /* Get Car By Plate Number */
     public CarsDTOResponse getCarByPlateNumber(String registrationNumber) {
         Cars car = carsRepository.findByregistrationNumber(registrationNumber);
         return new CarsDTOResponse(car);
     }
+
+    /**
+     * Add a new car
+     * @param request the request containing car details
+     * @return CarsDTOResponse
+     * This method creates a new car entity, sets its properties from the request,
+     * associates it with a user, and saves it to the repository.
+     */
 
     /* Add Car */
     public CarsDTOResponse addCar(CarsDTORequest request) {
@@ -67,6 +92,15 @@ public class CarsService {
         return new CarsDTOResponse(newCar);
     }
 
+    /**
+     * Update an existing car
+     * @param id the ID of the car to be updated
+     * @param request the request containing updated car details
+     * @return CarsDTOResponse
+     * This method retrieves the car by ID, updates its properties from the request,
+     * and saves it back to the repository.
+     */
+
     /* Update Car */
     public CarsDTOResponse updateCar(Long id, CarsDTORequest request) {
         Cars car = carsRepository.findById(id)
@@ -84,6 +118,12 @@ public class CarsService {
         carsRepository.save(car);
         return new CarsDTOResponse(car);
     }
+
+    /**
+     * Delete a car by ID
+     * @param id the ID of the car to be deleted
+     * This method deletes the car from the repository by its ID.
+     */
 
     /* Delete Car */
     public void deleteCar(Long id) {

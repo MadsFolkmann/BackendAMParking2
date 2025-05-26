@@ -27,6 +27,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /** Get All Users
+     * @return List of UserDTOResponse
+     * This method retrieves all users from the repository and maps them to UserDTOResponse.
+     */
+
     /*  Get All Users  */
     public List<UserDTOResponse> getAllUsers() {
         return userRepository.findAll().stream()
@@ -34,12 +39,24 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    /** Get Specific User
+     * @param id the ID of the user to be retrieved
+     * @return UserDTOResponse
+     * This method retrieves a specific user by ID and maps it to UserDTOResponse.
+     */
+
     /*  Get Specific User  */
     public UserDTOResponse getUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
         return new UserDTOResponse(user);
     }
+
+    /** Get Users by Rental Unit
+     * @param rentalUnitId the ID of the rental unit whose users are to be retrieved
+     * @return List of UserDTOResponse
+     * This method retrieves all users associated with a specific rental unit.
+     */
 
     /*  Get Users by Rental Unit  */
     public List<UserDTOResponse> getUsersByRentalUnit(Long rentalUnitId) {
@@ -50,6 +67,12 @@ public class UserService {
                 .map(UserDTOResponse::new)
                 .collect(Collectors.toList());
     }
+
+    /** Add User
+     * @param request the UserDTORequest containing the details of the user to be added
+     * @return UserDTOResponse
+     * This method adds a new user to the repository after validating the email and rental unit.
+     */
 
     /*  Add User  */
     public UserDTOResponse addUser(UserDTORequest request) {
@@ -77,6 +100,14 @@ public class UserService {
         return new UserDTOResponse(newUser);
     }
 
+
+    /** Login User
+     * @param email the email of the user trying to log in
+     * @param password the password of the user trying to log in
+     * @return UserDTOResponse
+     * This method authenticates a user by checking their email and password.
+     */
+
     /*  Login User  */
     public UserDTOResponse loginUser(String email, String password) {
         User user = userRepository.findByEmail(email)
@@ -88,6 +119,13 @@ public class UserService {
 
         return new UserDTOResponse(user);
     }
+
+    /** Update User
+     * @param id the ID of the user to be updated
+     * @param request the UserUpdateDTO containing the updated details
+     * @return UserDTOResponse
+     * This method updates an existing user's details.
+     */
 
     /*  Update User  */
     public UserDTOResponse updateUser(Long id, UserUpdateDTO request) {
@@ -111,6 +149,12 @@ public class UserService {
         userRepository.save(user);
         return new UserDTOResponse(user);
     }
+
+    /** Delete User
+     * @param id the ID of the user to be deleted
+     * This method deletes a user by their ID.
+     * If the user does not exist, it throws an EntityNotFoundException.
+     */
 
     /*  Delete User  */
     public void deleteUser(Long id) {

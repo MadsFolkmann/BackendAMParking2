@@ -17,6 +17,10 @@ public class PAreaService {
         this.pAreaRepository = pAreaRepository;
     }
 
+    /** Get All P-Areas
+     * @return List of PAreaDTOResponse
+     */
+
     /* Get All P-Areas */
     public List<PAreaDTOResponse> getAllPAreas() {
         List<PArea> allPAreas = pAreaRepository.findAll();
@@ -25,17 +29,34 @@ public class PAreaService {
                 .collect(Collectors.toList());
     }
 
+    /** Get P-Area By Area Name
+     * @param areaName the name of the area to be retrieved
+     * @return PAreaDTOResponse
+     */
+
     /* Get P-Area By Area Name */
     public PAreaDTOResponse getPAreaByAreaName(String areaName) {
         PArea pArea = pAreaRepository.findByAreaName(areaName);
         return new PAreaDTOResponse(pArea);
     }
 
+    /** Get P-Area By Id
+     * @param id the ID of the P-Area to be retrieved
+     * @return PAreaDTOResponse
+     */
+
   /* Get P-Area by Id */
     public PAreaDTOResponse getPAreaById(Long id) {
         PArea pArea = pAreaRepository.findById(id).orElse(null);
         return new PAreaDTOResponse(pArea);
     }
+
+
+
+    /** Add P-Area
+     * @param request the PAreaDTOResponse containing the details of the area to be added
+     * @return PAreaDTOResponse
+     */
 
     /* Add P-Area */
     public PAreaDTOResponse addPArea(PAreaDTOResponse request) {
@@ -48,6 +69,12 @@ public class PAreaService {
         pAreaRepository.save(newPArea);
         return new PAreaDTOResponse(newPArea);
     }
+
+    /** Update P-Area
+     * @param id the ID of the P-Area to be updated
+     * @param request the PAreaDTOResponse containing the updated details
+     * @return PAreaDTOResponse
+     */
 
     /* Update P-Area */
 
@@ -65,6 +92,10 @@ public class PAreaService {
             return null;
         }
     }
+
+    /** Delete P-Area
+     * @param id the ID of the P-Area to be deleted
+     */
 
     /* Delete P-Area */
     public void deletePArea(Long id) {

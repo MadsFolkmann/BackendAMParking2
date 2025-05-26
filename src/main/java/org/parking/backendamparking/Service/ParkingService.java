@@ -24,6 +24,11 @@ public class ParkingService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Get All Parkings
+     * @return List of ParkingDTOResponse
+     */
+
     /* Get All Parkings */
     public List<ParkingDTOResponse> getAllParkings() {
         List<Parking> allParkings = parkingRepository.findAll();
@@ -32,11 +37,23 @@ public class ParkingService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get Parking By Plate Number
+     * @param plateNumber the plate number of the parking to be retrieved
+     * @return ParkingDTOResponse
+     */
+
     /* Get Parking By Plate Number */
     public ParkingDTOResponse getParkingByPlateNumber(String plateNumber) {
         Parking parking = parkingRepository.findByPlateNumber(plateNumber);
         return new ParkingDTOResponse(parking);
     }
+
+    /**
+     * Get Parkings By User ID
+     * @param userId the ID of the user whose parkings are to be retrieved
+     * @return List of ParkingDTOResponse
+     */
 
 
     /* Get Parking By User ID */
@@ -49,18 +66,35 @@ public class ParkingService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get Parking By Parking Id
+     * @param id the ID of the parking to be retrieved
+     * @return ParkingDTOResponse
+     */
+
     /* Get Parking By Parking Id */
     public ParkingDTOResponse getParkingById(Long id) {
         Parking parking = parkingRepository.findById(id).orElse(null);
         return new ParkingDTOResponse(parking);
     }
 
-    // ParkingService.java
+    /**
+     * Check if there is an active parking by plate number
+     * @param plateNumber the plate number to check for active parking
+     * @return boolean indicating if there is an active parking
+     */
+
     public boolean hasActiveParkingByPlateNumber(String plateNumber) {
         LocalDateTime now = LocalDateTime.now();
         List<Parking> activeParkings = parkingRepository.findByPlateNumberAndEndTimeAfterOrPlateNumberAndEndTimeIsNull(plateNumber, now, plateNumber);
         return !activeParkings.isEmpty();
     }
+
+    /**
+     * Add Parking
+     * @param request the ParkingDTORequest containing the details of the parking to be added
+     * @return ParkingDTOResponse
+     */
 
     /* Add Parking */
     public ParkingDTOResponse addParking(ParkingDTORequest request) {
@@ -78,6 +112,13 @@ public class ParkingService {
         return new ParkingDTOResponse(newParking);
     }
 
+    /**
+     * Update Parking
+     * @param id the ID of the parking to be updated
+     * @param request the ParkingDTORequest containing the updated details
+     * @return ParkingDTOResponse
+     */
+
     /* Update Parking */
     public ParkingDTOResponse updateParking(Long id, ParkingDTORequest request) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
@@ -93,12 +134,24 @@ public class ParkingService {
         parkingRepository.save(parking);
         return new ParkingDTOResponse(parking);
     }
-    /* Delete Parking */
 
+    /**
+     * Delete Parking
+     * @param id the ID of the parking to be deleted
+     */
+
+    /* Delete Parking */
     public void deleteParking(Long id) {
         Parking parking = parkingRepository.findById(id).orElseThrow();
         parkingRepository.delete(parking);
     }
+
+    /**
+     * Get Parkings by User ID and Year
+     * @param userId the ID of the user whose parkings are to be retrieved
+     * @param year the year for which parkings are to be retrieved
+     * @return List of ParkingDTOResponse
+     */
 
     public List<ParkingDTOResponse> getParkingsByUserIdAndYear(Long userId, int year) {
         List<Parking> parkings = parkingRepository.findAll().stream()
@@ -109,6 +162,12 @@ public class ParkingService {
                 .map(ParkingDTOResponse::new)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Get Active Parkings by User ID
+     * @param userId the ID of the user whose active parkings are to be retrieved
+     * @return List of ParkingDTOResponse
+     */
 
     public List<ParkingDTOResponse> getActiveParkingsByUserId(Long userId) {
         LocalDateTime now = LocalDateTime.now();
