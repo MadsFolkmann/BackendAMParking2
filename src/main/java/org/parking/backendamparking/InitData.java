@@ -200,8 +200,8 @@ public class InitData implements CommandLineRunner {
         parking2.setCarColor("Blue");
         parking2.setCarModel("c3");
         parking2.setUser(savedUser2);
-        parking2.setStartTime(LocalDateTime.parse("2023-10-01 11:00:00", formatter));
-        parking2.setEndTime(LocalDateTime.parse("2023-10-01 13:00:00", formatter));
+        parking2.setStartTime(LocalDateTime.parse("2025-05-30 11:00:00", formatter));
+        parking2.setEndTime(LocalDateTime.parse("2025-06-01 13:00:00", formatter));
         Parking parking2Saved = parkingRepository.save(parking2);
 
         Parking parking3 = new Parking();
