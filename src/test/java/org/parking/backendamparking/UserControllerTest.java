@@ -1,13 +1,10 @@
 package org.parking.backendamparking;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.parking.backendamparking.Controller.UserController;
 import org.parking.backendamparking.DTO.UserDTOResponse;
-import org.parking.backendamparking.Entity.User;
-import org.parking.backendamparking.Roles;
 import org.parking.backendamparking.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,8 +19,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
@@ -128,8 +124,26 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[1].firstName").value("Ronaldo"));
     }
 
-    // test add user
+    /**
+     * Test for getting users by lejemaal (rental unit) that does not exist.
+     * @throws Exception
+     */
 
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void testGetUsersByLejemaalNotFound() throws Exception {
+        when(userService.getUsersByRentalUnit(9999999999L)).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/user/lejemaal/9999999999"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    /**
+     * Test for adding a new user.
+     * @throws Exception
+     */
     @Test
     @WithMockUser(roles = "ADMIN")
     void testAddUser() throws Exception {
@@ -178,6 +192,11 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.role").value("USER"));
     }
 
+    /**
+     * Test for adding a new user with invalid data.
+     * @throws Exception
+     */
+
     @Test
     @WithMockUser(roles = "ADMIN")
     void testAddUserWithInvalidData() throws Exception {
@@ -201,6 +220,106 @@ public class UserControllerTest {
                         .with(csrf()))
                 .andExpect(status().isBadRequest());
     }
+
+    // test for updating a user
+
+    /**
+     * Test for updating a user.
+     * @throws Exception
+     */
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void testUpdateUser() throws Exception {
+        UserDTOResponse updatedUser = new UserDTOResponse();
+        updatedUser.setId(1L);
+        updatedUser.setFirstName("OxUpdated");
+        updatedUser.setLastName("UpdatedOx123");
+        updatedUser.setEmail("Ox@gmail.com");
+        updatedUser.setPhoneNumber(87654321);
+        updatedUser.setRentalUnit(1000000020L);
+        updatedUser.setAddress("TestvejNy");
+        updatedUser.setCity("Rødovre");
+        updatedUser.setZipCode(2610);
+        updatedUser.setRole(Roles.USER);
+
+        when(userService.updateUser(Mockito.anyLong(), Mockito.any())).thenReturn(updatedUser);
+
+        String userUpdateJson = """
+                    {
+                        "firstName": "OxUpdated",
+                        "lastName": "UpdatedOx123",
+                        "email": "Ox@gmail.com",
+                        "phoneNumber": 87654321,
+                        "address": "TestvejNy",
+                        "city": "Rødovre",
+                        "zipCode": 2610,
+                        "role": "USER"
+                        }
+                """;
+
+        mockMvc.perform(put("/user/update/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(userUpdateJson)
+                        .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.firstName").value("OxUpdated"))
+                .andExpect(jsonPath("$.lastName").value("UpdatedOx123"))
+                .andExpect(jsonPath("$.email").value("Ox@gmail.com"))
+                .andExpect(jsonPath("$.phoneNumber").value(87654321))
+                .andExpect(jsonPath("$.rentalUnit").value(1000000020L))
+                .andExpect(jsonPath("$.address").value("TestvejNy"))
+                .andExpect(jsonPath("$.city").value("Rødovre"))
+                .andExpect(jsonPath("$.zipCode").value(2610))
+                .andExpect(jsonPath("$.role").value("USER"));
+
+    }
+
+
+    /**
+     * Test for updating a user with invalid data.
+     * @throws Exception
+     */
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void testUpdateUserWithInvalidData() throws Exception {
+        String invalidUserUpdateJson = """
+                {
+                    "firstName": "",
+                    "lastName": "UpdatedOx123",
+                    "email": "invalidemail",
+                    "phoneNumber": 87654321,
+                    "address": "TestvejNy",
+                    "city": "Rødovre",
+                    "zipCode": 2610,
+                    "role": "USER"
+                }
+            """;
+
+        mockMvc.perform(put("/user/update/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidUserUpdateJson)
+                        .with(csrf()))
+                .andExpect(status().isBadRequest());
+    }
+
+    /**
+     * Test for deleting a user.
+     * @throws Exception
+     */
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void testDeleteUser() throws Exception {
+        mockMvc.perform(delete("/user/delete/1")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        Mockito.verify(userService).deleteUser(1L);
+    }
+
 
 
 

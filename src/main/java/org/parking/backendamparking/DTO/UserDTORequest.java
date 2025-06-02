@@ -9,18 +9,29 @@ import org.parking.backendamparking.Roles;
 @Getter
 @Setter
 public class UserDTORequest {
-    @NotBlank
+    @NotBlank(message = "Firstname cannot be blank")
     private String firstName;
+
+    @NotBlank(message = "Lastname cannot be blank")
+
     private String lastName;
+
     private String password;
 
     @Email
     private String email;
+
+
     private int phoneNumber;
+
     private Long rentalUnit;
+
     private String address;
+
     private String city;
+
     private int zipCode;
+
     private Roles role;
 
 }
