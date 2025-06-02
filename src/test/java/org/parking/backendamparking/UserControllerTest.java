@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.parking.backendamparking.Controller.UserController;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Entity.User;
+import org.parking.backendamparking.Roles;
 import org.parking.backendamparking.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -129,7 +131,7 @@ public class UserControllerTest {
     // test add user
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "ADMIN")
     void testAddUser() throws Exception {
         UserDTOResponse newUser = new UserDTOResponse();
         newUser.setId(1L);
@@ -137,7 +139,7 @@ public class UserControllerTest {
         newUser.setLastName("Test");
         newUser.setEmail("newusertest@gmail.com");
         newUser.setPhoneNumber(12345678);
-        newUser.setRentalUnit(1000000014L);
+        newUser.setRentalUnit(1000000020L);
         newUser.setAddress("Testvej 1");
         newUser.setCity("Rødovre");
         newUser.setZipCode(2610);
@@ -146,34 +148,60 @@ public class UserControllerTest {
         when(userService.addUser(Mockito.any())).thenReturn(newUser);
 
         String userJson = """
-                    {
-                        "firstName": "newUserTest",
-                        "lastName": "Test",
-                        "email": "newusertest@gmail.com",
-                        "phoneNumber": 12345678,
-                        "rentalUnit": 1000000020,
-                        "address": "Testvej 1",
-                        "city": "Rødovre",
-                        "zipCode": 2610,
-                        "role": "USER"
-                    }
-                """;
+                {
+                    "firstName": "newUserTest",
+                    "lastName": "Test",
+                    "email": "newusertest@gmail.com",
+                    "phoneNumber": 12345678,
+                    "rentalUnit": 1000000020,
+                    "address": "Testvej 1",
+                    "city": "Rødovre",
+                    "zipCode": 2610,
+                    "role": "USER"
+                }
+            """;
 
         mockMvc.perform(post("/user/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(userJson))
+                        .content(userJson)
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.firstName").value("newUserTest"))
                 .andExpect(jsonPath("$.lastName").value("Test"))
                 .andExpect(jsonPath("$.email").value("newusertest@gmail.com"))
                 .andExpect(jsonPath("$.phoneNumber").value(12345678))
-                .andExpect(jsonPath("$.rentalUnit").value(1000000014L))
+                .andExpect(jsonPath("$.rentalUnit").value(1000000020L))
                 .andExpect(jsonPath("$.address").value("Testvej 1"))
                 .andExpect(jsonPath("$.city").value("Rødovre"))
                 .andExpect(jsonPath("$.zipCode").value(2610))
                 .andExpect(jsonPath("$.role").value("USER"));
     }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void testAddUserWithInvalidData() throws Exception {
+        String invalidUserJson = """
+                {
+                    "firstName": "",
+                    "lastName": "Test",
+                    "email": "invalidemail",
+                    "phoneNumber": 12345678,
+                    "rentalUnit": 1000000020,
+                    "address": "Testvej 1",
+                    "city": "Rødovre",
+                    "zipCode": 2610,
+                    "role": "USER"
+                }
+            """;
+
+        mockMvc.perform(post("/user/add")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidUserJson)
+                        .with(csrf()))
+                .andExpect(status().isBadRequest());
+    }
+
 
 
 }

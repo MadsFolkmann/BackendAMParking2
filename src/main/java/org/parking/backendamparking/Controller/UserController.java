@@ -1,5 +1,6 @@
 package org.parking.backendamparking.Controller;
 
+import jakarta.validation.Valid;
 import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
@@ -37,7 +38,7 @@ public class UserController {
         }
 
      @PostMapping("/add")
-     public UserDTOResponse addUser(@RequestBody UserDTORequest userDTORequest) {
+     public UserDTOResponse addUser(@Valid @RequestBody UserDTORequest userDTORequest) {
          return userService.addUser(userDTORequest);
      }
 
