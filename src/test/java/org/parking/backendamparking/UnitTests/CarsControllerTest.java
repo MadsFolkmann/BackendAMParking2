@@ -1,4 +1,4 @@
-package org.parking.backendamparking;
+package org.parking.backendamparking.UnitTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

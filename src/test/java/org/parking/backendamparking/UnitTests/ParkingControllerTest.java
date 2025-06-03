@@ -1,4 +1,4 @@
-package org.parking.backendamparking;
+package org.parking.backendamparking.UnitTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,7 @@ import org.parking.backendamparking.Controller.ParkingController;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
 import org.parking.backendamparking.Entity.PArea;
 import org.parking.backendamparking.Entity.User;
+import org.parking.backendamparking.Roles;
 import org.parking.backendamparking.Service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

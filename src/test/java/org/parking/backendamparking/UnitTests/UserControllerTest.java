@@ -1,15 +1,21 @@
-package org.parking.backendamparking;
+package org.parking.backendamparking.UnitTests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.parking.backendamparking.Controller.UserController;
+import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
+import org.parking.backendamparking.Entity.User;
+import org.parking.backendamparking.Repository.UserRepository;
+import org.parking.backendamparking.Roles;
 import org.parking.backendamparking.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,13 +34,32 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @MockBean
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private List<UserDTOResponse> userResponses;
+    @Autowired
+
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
+        userRepository.deleteAll();
+
+        User user = new User();
+        user.setEmail("test@example.com");
+        user.setPassword(passwordEncoder.encode("password123"));
+        user.setFirstName("Test");
+        user.setLastName("Bruger");
+
+        userRepository.save(user);
+
         UserDTOResponse user1 = new UserDTOResponse();
         user1.setId(1L);
         user1.setFirstName("Ox");
@@ -60,6 +85,9 @@ public class UserControllerTest {
         user2.setRole(Roles.ADMIN);
 
         userResponses = Arrays.asList(user1, user2);
+
+
+
     }
 
     @Test
@@ -220,6 +248,39 @@ public class UserControllerTest {
                         .with(csrf()))
                 .andExpect(status().isBadRequest());
     }
+    // test for login user
+    /**
+     * Test for logging in a user.
+     * @throws Exception
+     */
+
+    @Test
+    void testLoginSuccess() throws Exception {
+        // Create login request
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail("test@example.com");
+        loginRequest.setPassword("password123");
+
+        // Mock UserService login response
+        UserDTOResponse userResponse = new UserDTOResponse();
+        userResponse.setEmail("test@example.com");
+        userResponse.setFirstName("Test");
+        userResponse.setLastName("Bruger");
+        // Set other properties as needed
+
+        // Setup mock behavior
+        when(userService.loginUser(Mockito.any(userService.class))).thenReturn(userResponse);
+
+        // Perform test
+        mockMvc.perform(post("/user/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginRequest))
+                        .with(csrf()))  // Add CSRF token
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("test@example.com"));
+    }
+
+
 
     // test for updating a user
 
