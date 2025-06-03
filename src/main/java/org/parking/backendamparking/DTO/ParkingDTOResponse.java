@@ -1,7 +1,6 @@
 package org.parking.backendamparking.DTO;
 
 
-import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import org.parking.backendamparking.Entity.PArea;
 import org.parking.backendamparking.Entity.Parking;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
