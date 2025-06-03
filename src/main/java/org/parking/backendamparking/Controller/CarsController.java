@@ -1,5 +1,6 @@
 package org.parking.backendamparking.Controller;
 
+import jakarta.validation.Valid;
 import org.parking.backendamparking.DTO.CarsDTORequest;
 import org.parking.backendamparking.DTO.CarsDTOResponse;
 import org.parking.backendamparking.Service.CarsService;
@@ -34,7 +35,7 @@ public class CarsController {
     }
 
     @PostMapping("/add")
-    public CarsDTOResponse addCar(@RequestBody CarsDTORequest request) {
+    public CarsDTOResponse addCar(@Valid @RequestBody CarsDTORequest request) {
         return carsService.addCar(request);
     }
 

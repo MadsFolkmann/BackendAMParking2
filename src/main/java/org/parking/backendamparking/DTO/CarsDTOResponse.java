@@ -1,5 +1,6 @@
 package org.parking.backendamparking.DTO;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,8 @@ import org.parking.backendamparking.Entity.Cars;
 @NoArgsConstructor
 public class CarsDTOResponse {
     private Long id;
+
+    @NotBlank
     private String registrationNumber;
     private String make;
     private String model;

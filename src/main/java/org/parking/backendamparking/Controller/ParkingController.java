@@ -1,6 +1,7 @@
 package org.parking.backendamparking.Controller;
 
 
+import jakarta.validation.Valid;
 import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.ParkingDTOResponse;
 import org.parking.backendamparking.DTO.ParkingDTORequest;
@@ -53,14 +54,13 @@ public class ParkingController {
         return parkingService.getParkingsByUserIdAndYear(userId, year);
     }
 
-    // ParkingController.java
     @GetMapping("/active/plateNumber/{plateNumber}")
     public boolean hasActiveParkingByPlateNumber(@PathVariable String plateNumber) {
         return parkingService.hasActiveParkingByPlateNumber(plateNumber);
     }
 
     @PostMapping("/add")
-    public ParkingDTOResponse addParking(@RequestBody ParkingDTORequest parkingDTORequest) {
+    public ParkingDTOResponse addParking(@Valid @RequestBody ParkingDTORequest parkingDTORequest) {
         return parkingService.addParking(parkingDTORequest);
     }
 

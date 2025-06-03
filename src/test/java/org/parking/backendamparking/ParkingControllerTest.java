@@ -109,6 +109,12 @@ public class ParkingControllerTest {
         parkingResponses = Arrays.asList(parking1, parking2);
     }
 
+
+    /**
+     * Test for getting all parkings.
+     * @throws Exception
+     */
+
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testGetAllParkings() throws Exception {
@@ -125,6 +131,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$[1].carBrand", is("Honda")))
                 .andExpect(jsonPath("$[1].carModel", is("Civic")));
     }
+
+    /**
+     * Test for getting a parking by ID.
+     * @throws Exception
+     */
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -143,6 +154,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$.userId", is(1)));
     }
 
+    /**
+     * Test for getting active parkings by user ID.
+     * @throws Exception
+     */
+
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testGetParkingsByUserId() throws Exception {
@@ -157,6 +173,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$[0].plateNumber", is("ABC123")))
                 .andExpect(jsonPath("$[0].userId", is(1)));
     }
+
+    /**
+     * Test for getting active parkings by user ID and year.
+     * @throws Exception
+     */
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -175,6 +196,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$.userId", is(1)));
 
     }
+
+    /**
+     * Test for checking if a plate number has an active parking.
+     * @throws Exception
+     */
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -217,6 +243,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$.carColor", is("Green")))
                 .andExpect(jsonPath("$.userId", is(1)));
     }
+
+    /**
+     * Test for checking if a plate number has an active parking.
+     * @throws Exception
+     */
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -262,6 +293,11 @@ public class ParkingControllerTest {
 
     }
 
+    /**
+     * Test for deleting a parking by ID.
+     * @throws Exception
+     */
+
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testDeleteParking() throws Exception {
@@ -273,8 +309,5 @@ public class ParkingControllerTest {
 
         Mockito.verify(parkingService, Mockito.times(1)).deleteParking(parkingId);
     }
-
-
-
 
 }
