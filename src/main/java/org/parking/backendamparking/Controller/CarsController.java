@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.parking.backendamparking.DTO.CarsDTORequest;
 import org.parking.backendamparking.DTO.CarsDTOResponse;
 import org.parking.backendamparking.Service.CarsService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,14 +30,20 @@ public class CarsController {
         return carsService.getCarByPlateNumber(registrationNumber);
     }
 
+    @GetMapping("/{id}")
+    public CarsDTOResponse getCarById(@PathVariable Long id) {
+        return carsService.getCarById(id);
+    }
+
     @GetMapping("/user/{userId}")
     public List<CarsDTOResponse> getCarsByUserId(@PathVariable Long userId) {
         return carsService.getCarsByUserId(userId);
     }
 
     @PostMapping("/add")
-    public CarsDTOResponse addCar(@Valid @RequestBody CarsDTORequest request) {
-        return carsService.addCar(request);
+    public ResponseEntity<CarsDTOResponse> addCar(@RequestBody CarsDTORequest carRequest) {
+        CarsDTOResponse savedCar = carsService.addCar(carRequest);
+        return ResponseEntity.status(201).body(savedCar);
     }
 
     @PutMapping("/{id}")

@@ -116,45 +116,44 @@ public class CarsControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testAddCar() throws Exception {
+        CarsDTOResponse newCar = new CarsDTOResponse();
+        newCar.setRegistrationNumber("ABC123");
+        newCar.setMake("Toyota");
+        newCar.setModel("Corolla");
+        newCar.setModelYear(2020);
+        newCar.setColor("Red");
+        newCar.setType("Sedan");
+        newCar.setTotalWeight(12000);
 
-        CarsDTOResponse carResponse = new CarsDTOResponse();
-        carResponse.setId(3L);
-        carResponse.setRegistrationNumber("LMN789");
-        carResponse.setMake("Ford");
-        carResponse.setModel("Focus");
-        carResponse.setModelYear(2022);
-        carResponse.setColor("Green");
-        carResponse.setType("Sedan");
-        carResponse.setTotalWeight(14000);
-
-        when(carsService.addCar(org.mockito.ArgumentMatchers.any())).thenReturn(carResponse);
-
+        when(carsService.addCar(Mockito.any())).thenReturn(newCar);
         String carJson = """
                 
                 {
-                    "registrationNumber": "LMN789",
-                    "make": "Ford",
-                    "model": "Focus",
-                    "modelYear": 2022,
-                    "color": "Green",
+                    "registrationNumber": "ABC123",
+                    "make": "Toyota",
+                    "model": "Corolla",
+                    "modelYear": 2020,
+                    "color": "Red",
                     "type": "Sedan",
-                    "totalWeight": 14000
+                    "totalWeight": 12000
                 }
                 """;
 
-        mockMvc.perform(post("/cars/add")
+        mockMvc.perform(post("/cars")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(carJson)
                         .with(csrf()))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.registrationNumber", is("LMN789")))
-                .andExpect(jsonPath("$.make", is("Ford")))
-                .andExpect(jsonPath("$.model", is("Focus")))
-                .andExpect(jsonPath("$.modelYear", is(2022)))
-                .andExpect(jsonPath("$.color", is("Green")))
-                .andExpect(jsonPath("$.type", is("Sedan")))
-                .andExpect(jsonPath("$.totalWeight", is(14000)));
+                .andExpect(jsonPath("$.registrationNumber").value("ABC123"))
+                .andExpect(jsonPath("$.make").value("Toyota"))
+                .andExpect(jsonPath("$.model").value("Corolla"))
+                .andExpect(jsonPath("$.modelYear").value(2020))
+                .andExpect(jsonPath("$.color").value("Red"))
+                .andExpect(jsonPath("$.type").value("Sedan"))
+                .andExpect(jsonPath("$.totalWeight").value(12000));
+
+
 
     }
 

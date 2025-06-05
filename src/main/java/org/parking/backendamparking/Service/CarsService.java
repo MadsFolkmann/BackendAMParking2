@@ -34,6 +34,19 @@ public class CarsService {
     }
 
     /**
+     * Get Car By ID
+     * @param id the ID of the car to be retrieved
+     * @return CarsDTOResponse
+     * This method retrieves a car by its ID and maps it to CarsDTOResponse.
+     */
+
+    public CarsDTOResponse getCarById(Long id) {
+        Cars car = carsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Car not found"));
+        return new CarsDTOResponse(car);
+    }
+
+    /**
      * Get Cars By User ID
      * @param userId the ID of the user whose cars are to be retrieved
      * @return List of CarsDTOResponse
