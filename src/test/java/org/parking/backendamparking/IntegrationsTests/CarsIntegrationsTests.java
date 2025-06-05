@@ -20,7 +20,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -231,21 +231,11 @@ private CaseRepository caseRepository;
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testDeleteCar_Integration() throws Exception {
-        mockMvc.perform(delete("/cars/" + testCar1.getId())
+        Long carId = testCar1.getId();
+        mockMvc.perform(delete("/cars/" + carId)
                         .with(csrf()))
                 .andExpect(status().isNoContent());
 
-        // Verify that the car is deleted
-        mockMvc.perform(get("/cars/" + testCar1.getId()))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.message", is("Car not found with id: " + testCar1.getId())));
-
+        assertFalse(carsRepository.existsById(carId));
     }
-
-
-
-
-
-
 }

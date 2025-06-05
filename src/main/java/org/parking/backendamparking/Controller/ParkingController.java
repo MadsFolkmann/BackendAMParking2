@@ -7,6 +7,7 @@ import org.parking.backendamparking.DTO.ParkingDTOResponse;
 import org.parking.backendamparking.DTO.ParkingDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.Service.ParkingService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,8 +61,9 @@ public class ParkingController {
     }
 
     @PostMapping("/add")
-    public ParkingDTOResponse addParking(@Valid @RequestBody ParkingDTORequest parkingDTORequest) {
-        return parkingService.addParking(parkingDTORequest);
+    public ResponseEntity<ParkingDTOResponse> addParking(@Valid @RequestBody ParkingDTORequest parkingDTORequest) {
+        ParkingDTOResponse savedParking = parkingService.addParking(parkingDTORequest);
+        return ResponseEntity.status(201).body(savedParking);
     }
 
     @PutMapping("/{id}")
@@ -70,8 +72,9 @@ public class ParkingController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteParking(@PathVariable Long id) {
+    public  ResponseEntity<Void>deleteParking(@PathVariable Long id) {
         parkingService.deleteParking(id);
+        return ResponseEntity.noContent().build();
     }
 
 

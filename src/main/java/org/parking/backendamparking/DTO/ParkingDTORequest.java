@@ -2,6 +2,7 @@ package org.parking.backendamparking.DTO;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.parking.backendamparking.Entity.PArea;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ParkingDTORequest {
-    @NotBlank
+    @NotNull(message = "PArea cannot be null")
     private PArea parea;
 
     @NotBlank
@@ -21,10 +22,8 @@ public class ParkingDTORequest {
     private String carBrand;
     private String carModel;
 
-    @NotBlank
     private LocalDateTime startTime;
 
-    @NotBlank
     private LocalDateTime endTime;
     private Long userId;
 }

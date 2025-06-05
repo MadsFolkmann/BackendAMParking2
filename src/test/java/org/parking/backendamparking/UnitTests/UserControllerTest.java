@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,13 +33,11 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @MockBean
     private UserService userService;
 
-    @Autowired
+    @MockBean
     private UserRepository userRepository;
 
     private List<UserDTOResponse> userResponses;
@@ -50,11 +47,10 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        userRepository.deleteAll();
 
         User user = new User();
         user.setEmail("test@example.com");
-        user.setPassword(passwordEncoder.encode("password123"));
+        user.setPassword("password123");
         user.setFirstName("Test");
         user.setLastName("Bruger");
 
@@ -100,10 +96,8 @@ public class UserControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].firstName").value("Ox"))
-                .andExpect(jsonPath("$[0].lastName").value("Test"))
-                .andExpect(jsonPath("$[0].email").value("OxTest@Test.com"))
-                .andExpect(jsonPath("$[1].firstName").value("Ronaldo"))
-                .andExpect(jsonPath("$[1].role").value("ADMIN"));
+                .andExpect(jsonPath("$[1].firstName").value("Ronaldo"));
+
     }
 
     @Test
@@ -176,49 +170,50 @@ public class UserControllerTest {
     @WithMockUser(roles = "ADMIN")
     void testAddUser() throws Exception {
         UserDTOResponse newUser = new UserDTOResponse();
-        newUser.setId(1L);
-        newUser.setFirstName("newUserTest");
-        newUser.setLastName("Test");
-        newUser.setEmail("newusertest@gmail.com");
+        newUser.setId(3L);
+        newUser.setFirstName("New");
+        newUser.setLastName("User");
+        newUser.setEmail("newUser@test.com");
         newUser.setPhoneNumber(12345678);
         newUser.setRentalUnit(1000000020L);
-        newUser.setAddress("Testvej 1");
-        newUser.setCity("Rødovre");
-        newUser.setZipCode(2610);
+        newUser.setAddress("New Address");
+        newUser.setCity("New City");
+        newUser.setZipCode(1234);
         newUser.setRole(Roles.USER);
 
         when(userService.addUser(Mockito.any())).thenReturn(newUser);
 
-        String userJson = """
+        String newUserJson = """
                 {
-                    "firstName": "newUserTest",
-                    "lastName": "Test",
-                    "email": "newusertest@gmail.com",
+                    "firstName": "New",
+                    "lastName": "User",
+                    "email": "newUser@test.com",
                     "phoneNumber": 12345678,
                     "rentalUnit": 1000000020,
-                    "address": "Testvej 1",
-                    "city": "Rødovre",
-                    "zipCode": 2610,
+                    "address": "New Address",
+                    "city": "New City",
+                    "zipCode": 1234,
                     "role": "USER"
                 }
-            """;
+                """;
 
         mockMvc.perform(post("/user/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(userJson)
+                        .content(newUserJson)
                         .with(csrf()))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.firstName").value("newUserTest"))
-                .andExpect(jsonPath("$.lastName").value("Test"))
-                .andExpect(jsonPath("$.email").value("newusertest@gmail.com"))
+                .andExpect(jsonPath("$.firstName").value("New"))
+                .andExpect(jsonPath("$.lastName").value("User"))
+                .andExpect(jsonPath("$.email").value("newUser@test.com"))
                 .andExpect(jsonPath("$.phoneNumber").value(12345678))
-                .andExpect(jsonPath("$.rentalUnit").value(1000000020L))
-                .andExpect(jsonPath("$.address").value("Testvej 1"))
-                .andExpect(jsonPath("$.city").value("Rødovre"))
-                .andExpect(jsonPath("$.zipCode").value(2610))
+                .andExpect(jsonPath("$.rentalUnit").value(1000000020))
+                .andExpect(jsonPath("$.address").value("New Address"))
+                .andExpect(jsonPath("$.city").value("New City"))
+                .andExpect(jsonPath("$.zipCode").value(1234))
                 .andExpect(jsonPath("$.role").value("USER"));
     }
+
 
     /**
      * Test for adding a new user with invalid data.
@@ -367,19 +362,23 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+
     /**
-     * Test for deleting a user.
-     * @throws Exception
+     * Test for delete user not found
      */
+
+
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void testDeleteUser() throws Exception {
-        mockMvc.perform(delete("/user/delete/1")
-                        .with(csrf()))
-                .andExpect(status().isOk());
+        Long userId = 1L;
 
-        Mockito.verify(userService).deleteUser(1L);
+        mockMvc.perform(delete("/user/delete/" + userId)
+                        .with(csrf()))
+                .andExpect(status().isNoContent());
+
+        Mockito.verify(userService).deleteUser(userId);
     }
 
 

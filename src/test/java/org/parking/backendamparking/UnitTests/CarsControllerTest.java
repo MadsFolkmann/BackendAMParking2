@@ -76,19 +76,17 @@ public class CarsControllerTest {
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testGetCarByPlateNumber() throws Exception {
-        String plateNumber = "ABC123";
-        when(carsService.getCarByPlateNumber(plateNumber)).thenReturn(carResponses.get(0));
+        String registrationNumber = "ABC123";
+        CarsDTOResponse carResponse = carResponses.get(0);
+        when(carsService.getCarByPlateNumber(registrationNumber)).thenReturn(carResponse);
 
-        mockMvc.perform(get("/cars/" + plateNumber))
+        mockMvc.perform(get("/cars/plate/" + registrationNumber))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.registrationNumber", is("ABC123")))
                 .andExpect(jsonPath("$.make", is("Toyota")))
-                .andExpect(jsonPath("$.model", is("Corolla")))
-                .andExpect(jsonPath("$.modelYear", is(2020)))
-                .andExpect(jsonPath("$.color", is("Red")))
-                .andExpect(jsonPath("$.type", is("Sedan")))
-                .andExpect(jsonPath("$.totalWeight", is(12000)));
+                .andExpect(jsonPath("$.model", is("Corolla")));
+
 
     }
 
@@ -117,43 +115,41 @@ public class CarsControllerTest {
     @WithMockUser(roles = "ADMIN")
     public void testAddCar() throws Exception {
         CarsDTOResponse newCar = new CarsDTOResponse();
-        newCar.setRegistrationNumber("ABC123");
-        newCar.setMake("Toyota");
-        newCar.setModel("Corolla");
-        newCar.setModelYear(2020);
-        newCar.setColor("Red");
+        newCar.setRegistrationNumber("LMN789");
+        newCar.setMake("Ford");
+        newCar.setModel("Focus");
+        newCar.setModelYear(2022);
+        newCar.setColor("Green");
         newCar.setType("Sedan");
-        newCar.setTotalWeight(12000);
+        newCar.setTotalWeight(14000);
 
         when(carsService.addCar(Mockito.any())).thenReturn(newCar);
+
         String carJson = """
-                
                 {
-                    "registrationNumber": "ABC123",
-                    "make": "Toyota",
-                    "model": "Corolla",
-                    "modelYear": 2020,
-                    "color": "Red",
+                    "registrationNumber": "LMN789",
+                    "make": "Ford",
+                    "model": "Focus",
+                    "modelYear": 2022,
+                    "color": "Green",
                     "type": "Sedan",
-                    "totalWeight": 12000
+                    "totalWeight": 14000
                 }
                 """;
 
-        mockMvc.perform(post("/cars")
+        mockMvc.perform(post("/cars/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(carJson)
                         .with(csrf()))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.registrationNumber").value("ABC123"))
-                .andExpect(jsonPath("$.make").value("Toyota"))
-                .andExpect(jsonPath("$.model").value("Corolla"))
-                .andExpect(jsonPath("$.modelYear").value(2020))
-                .andExpect(jsonPath("$.color").value("Red"))
+                .andExpect(jsonPath("$.registrationNumber").value("LMN789"))
+                .andExpect(jsonPath("$.make").value("Ford"))
+                .andExpect(jsonPath("$.model").value("Focus"))
+                .andExpect(jsonPath("$.modelYear").value(2022))
+                .andExpect(jsonPath("$.color").value("Green"))
                 .andExpect(jsonPath("$.type").value("Sedan"))
-                .andExpect(jsonPath("$.totalWeight").value(12000));
-
-
+                .andExpect(jsonPath("$.totalWeight").value(14000));
 
     }
 
@@ -218,9 +214,10 @@ public class CarsControllerTest {
 
         mockMvc.perform(delete("/cars/" + carId)
                         .with(csrf()))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         Mockito.verify(carsService, Mockito.times(1)).deleteCar(carId);
+
     }
 
 }

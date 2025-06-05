@@ -1,11 +1,14 @@
 package org.parking.backendamparking.Controller;
 
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.DTO.UserUpdateDTO;
 import org.parking.backendamparking.Service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +41,8 @@ public class UserController {
         }
 
      @PostMapping("/add")
-     public UserDTOResponse addUser(@Valid @RequestBody UserDTORequest userDTORequest) {
-         return userService.addUser(userDTORequest);
+     public ResponseEntity<UserDTOResponse> addUser(@Valid @RequestBody UserDTORequest userDTORequest) {
+        return ResponseEntity.status(201).body(userService.addUser(userDTORequest));
      }
 
     @PostMapping("/login")
@@ -53,10 +56,10 @@ public class UserController {
          return userService.updateUser(id, userUpdateDTO);
      }
 
-     @DeleteMapping("/delete/{id}")
-     public void deleteUser(@PathVariable Long id) {
-         userService.deleteUser(id);
-     }
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

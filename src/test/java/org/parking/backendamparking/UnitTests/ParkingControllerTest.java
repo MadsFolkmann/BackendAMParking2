@@ -207,27 +207,26 @@ public class ParkingControllerTest {
     @WithMockUser(roles = "ADMIN")
     public void testAddParking() throws Exception {
         ParkingDTOResponse newParking = new ParkingDTOResponse();
-        newParking.setId(3L);
-        newParking.setPlateNumber("DEF789");
+        newParking.setPlateNumber("ABC123");
         newParking.setUserId(1L);
-        newParking.setCarColor("Green");
-        newParking.setCarBrand("Ford");
-        newParking.setCarModel("Focus");
-        newParking.setStartTime(LocalDateTime.parse("2023-10-01T14:00:00"));
-        newParking.setEndTime(LocalDateTime.parse("2023-10-01T16:00:00"));
+        newParking.setCarColor("Red");
+        newParking.setCarBrand("Toyota");
+        newParking.setCarModel("Corolla");
+        newParking.setStartTime(LocalDateTime.parse("2023-10-01T10:00:00"));
+        newParking.setEndTime(LocalDateTime.parse("2023-10-01T12:00:00"));
         newParking.setParea(area1);
 
         when(parkingService.addParking(Mockito.any())).thenReturn(newParking);
 
         String parkingJson = """
                 {
-                    "plateNumber": "DEF789",
+                    "plateNumber": "ABC123",
                     "userId": 1,
-                    "carColor": "Green",
-                    "carBrand": "Ford",
-                    "carModel": "Focus",
-                    "startTime": "2023-10-01T14:00:00",
-                    "endTime": "2023-10-01T16:00:00",
+                    "carColor": "Red",
+                    "carBrand": "Toyota",
+                    "carModel": "Corolla",
+                    "startTime": "2023-10-01T10:00:00",
+                    "endTime": "2023-10-01T12:00:00",
                     "pareaId": 1
                 }
                 """;
@@ -236,13 +235,14 @@ public class ParkingControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(parkingJson)
                         .with(csrf()))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.plateNumber", is("DEF789")))
-                .andExpect(jsonPath("$.carBrand", is("Ford")))
-                .andExpect(jsonPath("$.carModel", is("Focus")))
-                .andExpect(jsonPath("$.carColor", is("Green")))
+                .andExpect(jsonPath("$.plateNumber", is("ABC123")))
+                .andExpect(jsonPath("$.carBrand", is("Toyota")))
+                .andExpect(jsonPath("$.carModel", is("Corolla")))
+                .andExpect(jsonPath("$.carColor", is("Red")))
                 .andExpect(jsonPath("$.userId", is(1)));
+
     }
 
     /**
