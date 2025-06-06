@@ -93,6 +93,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
+    @WithMockUser(roles = "ADMIN")
     public void testGetAllCases() throws Exception {
         mockMvc.perform(get("/case"))
                 .andExpect(status().isOk())
@@ -171,7 +172,6 @@ public class CaseIntegrationsTests {
     public void testAddCase_MissingFields() throws Exception {
         CaseDTORequest newCaseRequest = new CaseDTORequest();
         newCaseRequest.setUserId(testUser.getId());
-        // Missing description, time, done, and plateNumber
 
         mockMvc.perform(post("/case/add")
                 .contentType(MediaType.APPLICATION_JSON)
