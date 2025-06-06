@@ -25,10 +25,11 @@ public class CarsController {
         return carsService.getAllCars();
     }
 
-    @GetMapping("/plate/{registration_number}")
+    @GetMapping("/plate/{registrationNumber}")
     public CarsDTOResponse getCarByPlateNumber(@PathVariable String registrationNumber) {
         return carsService.getCarByPlateNumber(registrationNumber);
     }
+
 
     @GetMapping("/{id}")
     public CarsDTOResponse getCarById(@PathVariable Long id) {

@@ -18,7 +18,7 @@ public class UserDTORequest {
 
     private String password;
 
-    @Email
+    @Email(message = "Email must be valid")
     private String email;
 
 

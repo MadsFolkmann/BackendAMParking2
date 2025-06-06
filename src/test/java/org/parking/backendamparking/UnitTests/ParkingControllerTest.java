@@ -220,16 +220,24 @@ public class ParkingControllerTest {
 
         String parkingJson = """
                 {
-                    "plateNumber": "ABC123",
-                    "userId": 1,
-                    "carColor": "Red",
-                    "carBrand": "Toyota",
-                    "carModel": "Corolla",
-                    "startTime": "2023-10-01T10:00:00",
-                    "endTime": "2023-10-01T12:00:00",
-                    "pareaId": 1
+                  "plateNumber": "ABC123",
+                  "userId": 1,
+                  "parea": {
+                    "id": 1,
+                    "areaName": "Rødovre A",
+                    "city": "Rødovre",
+                    "postalCode": 2610,
+                    "daysAllowedParking": 3
+                  },
+                  "carColor": "Red",
+                  "carBrand": "Toyota",
+                  "carModel": "Corolla",
+                  "startTime": "2023-10-01T10:00:00",
+                  "endTime": "2023-10-01T12:00:00"
                 }
-                """;
+                
+        """;
+
 
         mockMvc.perform(post("/parking/add")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -241,7 +249,11 @@ public class ParkingControllerTest {
                 .andExpect(jsonPath("$.carBrand", is("Toyota")))
                 .andExpect(jsonPath("$.carModel", is("Corolla")))
                 .andExpect(jsonPath("$.carColor", is("Red")))
-                .andExpect(jsonPath("$.userId", is(1)));
+                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect(jsonPath("$.startTime", is("2023-10-01T10:00:00")))
+                .andExpect(jsonPath("$.endTime", is("2023-10-01T12:00:00")))
+                .andExpect(jsonPath("$.parea.areaName", is("Rødovre A")));
+
 
     }
 
@@ -269,15 +281,22 @@ public class ParkingControllerTest {
 
         String parkingJson = """
                 {
-                    "plateNumber": "ABC123",
-                    "userId": 1,
-                    "carColor": "Red",
-                    "carBrand": "Toyota",
-                    "carModel": "Corolla",
-                    "startTime": "2023-10-01T10:00:00",
-                    "endTime": "2023-10-01T12:00:00",
-                    "pareaId": 1
+                  "plateNumber": "ABC123",
+                  "userId": 1,
+                  "parea": {
+                    "id": 1,
+                    "areaName": "Rødovre A",
+                    "city": "Rødovre",
+                    "postalCode": 2610,
+                    "daysAllowedParking": 3
+                  },
+                  "carColor": "Red",
+                  "carBrand": "Toyota",
+                  "carModel": "Corolla",
+                  "startTime": "2023-10-01T10:00:00",
+                  "endTime": "2023-10-01T12:00:00"
                 }
+                
                 """;
 
         mockMvc.perform(put("/parking/" + parkingId)
@@ -306,9 +325,10 @@ public class ParkingControllerTest {
 
         mockMvc.perform(delete("/parking/" + parkingId)
                         .with(csrf()))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
-        Mockito.verify(parkingService, Mockito.times(1)).deleteParking(parkingId);
+        Mockito.verify(parkingService).deleteParking(parkingId);
+
     }
 
 }

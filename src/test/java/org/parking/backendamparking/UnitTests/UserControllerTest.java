@@ -346,7 +346,7 @@ public class UserControllerTest {
                 {
                     "firstName": "",
                     "lastName": "UpdatedOx123",
-                    "email": "invalidemail",
+                    "email": "Ox@gmail.com",
                     "phoneNumber": 87654321,
                     "address": "TestvejNy",
                     "city": "Rødovre",
@@ -359,7 +359,8 @@ public class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalidUserUpdateJson)
                         .with(csrf()))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0].field").value("firstName"));
     }
 
 
