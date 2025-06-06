@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "`case`") // Escaping the table name
+@Table(name = "`case`")
 public class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

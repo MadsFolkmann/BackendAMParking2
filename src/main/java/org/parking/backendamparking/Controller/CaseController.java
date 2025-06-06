@@ -3,6 +3,7 @@ package org.parking.backendamparking.Controller;
 import org.parking.backendamparking.DTO.CaseDTORequest;
 import org.parking.backendamparking.DTO.CaseDTOResponse;
 import org.parking.backendamparking.Service.CaseService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,15 +29,15 @@ public class CaseController {
         return caseService.getCasesById(id);
     }
 
-    /* Get Cases By user ID */
     @GetMapping("/user/{userId}")
     public List<CaseDTOResponse> getCaseByUserId(@PathVariable Long userId) {
         return caseService.getCasesByUserId(userId);
     }
 
     @PostMapping("/add")
-    public CaseDTOResponse addCase(@RequestBody CaseDTORequest request) {
-        return caseService.addCase(request);
+    public ResponseEntity<CaseDTOResponse> addCase(@RequestBody CaseDTORequest request) {
+        CaseDTOResponse savedCase = caseService.addCase(request);
+        return ResponseEntity.status(201).body(savedCase);
     }
 
     @PutMapping("/{id}")
@@ -45,8 +46,9 @@ public class CaseController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCase(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCase(@PathVariable Long id) {
         caseService.deleteCase(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
