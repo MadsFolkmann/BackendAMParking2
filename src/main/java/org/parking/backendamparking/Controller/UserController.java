@@ -1,13 +1,11 @@
 package org.parking.backendamparking.Controller;
 
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.DTO.UserUpdateDTO;
 import org.parking.backendamparking.Service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
