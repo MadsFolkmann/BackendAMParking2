@@ -155,7 +155,7 @@ private CaseRepository caseRepository;
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testGetCarById_NotFound_Integration() throws Exception {
-        mockMvc.perform(get("/cars/9999"))
+        mockMvc.perform(get("/cars/15"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.message", is("Car not found with id: 9999")));

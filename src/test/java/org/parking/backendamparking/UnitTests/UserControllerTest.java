@@ -367,8 +367,7 @@ public class UserControllerTest {
     /**
      * Test for delete user not found
      */
-
-
+    
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -381,8 +380,4 @@ public class UserControllerTest {
 
         Mockito.verify(userService).deleteUser(userId);
     }
-
-
-
-
 }
