@@ -31,6 +31,6 @@ https://amparking-cvbzhddea9cjb0eh.northeurope-01.azurewebsites.net/swagger-ui/i
 ```
 
 
-Security
+
 Security is inspired by this repository:
 https://github.com/lmor-spring2024/security-start-backend
