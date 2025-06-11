@@ -26,49 +26,47 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         /* Public User endpoints */
-                        .requestMatchers(antMatcher("/user")).permitAll()
-                        .requestMatchers("/user/**").permitAll()
-                        .requestMatchers(antMatcher("/user/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/user/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/user/lejemaal/**")).permitAll()
-                        .requestMatchers(antMatcher("/user/login")).permitAll()
-                        .requestMatchers(antMatcher("/user/{id}")).permitAll()
+                        .requestMatchers(antMatcher("/user")).hasAnyAuthority( "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/update/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/delete/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/lejemaal/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/login")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/{id}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
 
-                        /* Public Parking endpoints */
-                        .requestMatchers(antMatcher("/parking")).permitAll()
+                        /* Parking endpoints */
+                        .requestMatchers(antMatcher("/parking")).hasAnyAuthority("ADMIN")
                         .requestMatchers(antMatcher("/parking/active/user/**")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/add")).hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/parking/update/**")).permitAll()
                         .requestMatchers(antMatcher("/parking/delete/**")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/plateNumber/**")).hasAnyAuthority("PVAGT", "ADMIN")
                         .requestMatchers(antMatcher("/parking/user/**")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/{id}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/parking/active/plateNumber/**")).hasAnyAuthority("PVAGT", "ADMIN")
 
-                        /* Public Cars endpoints */
-                        .requestMatchers(antMatcher("/cars")).permitAll()
+                        /* Cars endpoints */
+                        .requestMatchers(antMatcher("/cars")).hasAnyAuthority( "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/cars/**")).permitAll()
-                        .requestMatchers(antMatcher("/cars/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/cars/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/cars/user/**")).hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
+                        .requestMatchers(antMatcher("/cars/update/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/cars/delete/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/cars/user/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/cars/{plateNumber}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
 
-                        /* Public Cases endpoints */
-                        .requestMatchers(antMatcher("/case")).permitAll()
-                        .requestMatchers(antMatcher("/case/add")).permitAll()
-                        .requestMatchers(antMatcher("/case/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/case/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/case/user/**")).permitAll()
+                        /* Cases endpoints */
+                        .requestMatchers(antMatcher("/case")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/case/add")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/case/update/**")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/case/delete/**")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/case/user/**")).hasAnyAuthority("ADMIN", "PVAGT")
 
                         /* Public PArea endpoints */
-                        .requestMatchers(antMatcher("/pArea")).permitAll()
-                        .requestMatchers(antMatcher("/pArea/add")).permitAll()
-                        .requestMatchers(antMatcher("/pArea/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/pArea/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/pArea/{areaName}")).permitAll()
-                        .requestMatchers(antMatcher("/pArea/{id}")).permitAll()
+                        .requestMatchers(antMatcher("/pArea")).hasAnyAuthority("ADMIN", "PVAGT", "USER")
+                        .requestMatchers(antMatcher("/pArea/add")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/pArea/update/**")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/pArea/delete/**")).hasAnyAuthority("ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/pArea/{areaName}")).hasAnyAuthority("ADMIN", "PVAGT", "USER")
+                        .requestMatchers(antMatcher("/pArea/{id}")).hasAnyAuthority("ADMIN", "PVAGT", "USER")
 
-                        /* Public RentalUnitEndpoint endpoints */
+                        /* RentalUnitEndpoint endpoints */
                         .requestMatchers(antMatcher("/rentalUnit/check/**")).permitAll()
 
 
