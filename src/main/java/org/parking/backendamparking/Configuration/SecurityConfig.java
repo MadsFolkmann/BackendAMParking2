@@ -34,7 +34,7 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/user/{id}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
 
                         /* Parking endpoints */
-                        .requestMatchers(antMatcher("/parking")).hasAnyAuthority("ADMIN")
+                        .requestMatchers(antMatcher("/parking")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/active/user/**")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/add")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/delete/**")).hasAnyAuthority("USER", "ADMIN")
