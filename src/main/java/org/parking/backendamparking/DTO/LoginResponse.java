@@ -14,6 +14,5 @@ public class LoginResponse {
         this.user = user;
     }
 
-    // getters and setters
 
 }

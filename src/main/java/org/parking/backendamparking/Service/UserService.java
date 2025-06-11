@@ -114,6 +114,7 @@ public class UserService {
 
     /*  Login User  */
     public LoginResponse loginUser(String email, String password) {
+        System.out.println("Attempting to log in user with email: " + email);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("No user found with email: " + email));
 
