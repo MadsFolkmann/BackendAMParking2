@@ -110,7 +110,7 @@ public class ParkingIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetAllParkings() throws Exception {
         mockMvc.perform(get("/parking"))
                 .andExpect(status().isOk())
@@ -126,7 +126,7 @@ public class ParkingIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetParkingById() throws Exception {
         mockMvc.perform(get("/parking/" + testParking1.getId()))
                 .andExpect(status().isOk())
@@ -144,7 +144,7 @@ public class ParkingIntegrationsTests {
      * @throws Exception if the request fails
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testAddParking() throws Exception {
         ParkingDTORequest newParkingRequest = new ParkingDTORequest();
         newParkingRequest.setPlateNumber("LMN789");
@@ -172,7 +172,7 @@ public class ParkingIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testUpdateParking() throws Exception {
         ParkingDTORequest updateParkingRequest = new ParkingDTORequest();
         updateParkingRequest.setPlateNumber("XYZ789");
@@ -199,7 +199,7 @@ public class ParkingIntegrationsTests {
      * @throws Exception if the request fails
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testDeleteParking() throws Exception {
         Long parkingId = testParking1.getId();
         mockMvc.perform(delete("/parking/ " + parkingId)
