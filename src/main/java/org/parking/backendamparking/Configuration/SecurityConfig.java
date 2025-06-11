@@ -29,14 +29,14 @@ public class SecurityConfig {
 
                         /* Public Parking endpoints */
                         .requestMatchers(antMatcher("/parking")).permitAll()
-                        .requestMatchers(antMatcher("/parking/active/user/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/add")).permitAll()
+                        .requestMatchers(antMatcher("/parking/active/user/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/add")).hasAnyRole("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/plateNumber/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/user/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/{id}")).permitAll()
-                        .requestMatchers(antMatcher("/parking/active/plateNumber/**")).permitAll()
+                        .requestMatchers(antMatcher("/parking/delete/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/plateNumber/**")).hasAnyRole("PVAGT", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/user/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/{id}")).hasAnyRole("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/parking/active/plateNumber/**")).hasAnyRole("PVAGT", "ADMIN")
 
                         /* Public Cars endpoints */
                         .requestMatchers(antMatcher("/cars")).permitAll()
