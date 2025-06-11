@@ -36,21 +36,21 @@ public class SecurityConfig {
 
                         /* Public Parking endpoints */
                         .requestMatchers(antMatcher("/parking")).permitAll()
-                        .requestMatchers(antMatcher("/parking/active/user/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/parking/add")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/active/user/**")).hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/add")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/parking/update/**")).permitAll()
-                        .requestMatchers(antMatcher("/parking/delete/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/parking/plateNumber/**")).hasAnyRole("PVAGT", "ADMIN")
-                        .requestMatchers(antMatcher("/parking/user/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/parking/{id}")).hasAnyRole("USER", "ADMIN", "PVAGT")
-                        .requestMatchers(antMatcher("/parking/active/plateNumber/**")).hasAnyRole("PVAGT", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/delete/**")).hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/plateNumber/**")).hasAnyAuthority("PVAGT", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/user/**")).hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(antMatcher("/parking/{id}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/parking/active/plateNumber/**")).hasAnyAuthority("PVAGT", "ADMIN")
 
                         /* Public Cars endpoints */
                         .requestMatchers(antMatcher("/cars")).permitAll()
                         .requestMatchers(antMatcher("/cars/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/update/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/delete/**")).permitAll()
-                        .requestMatchers(antMatcher("/cars/user/**")).permitAll()
+                        .requestMatchers(antMatcher("/cars/user/**")).hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(antMatcher("/cars/{plateNumber}")).permitAll()
 
                         /* Public Cases endpoints */
