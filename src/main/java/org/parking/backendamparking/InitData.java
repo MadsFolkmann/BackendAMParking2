@@ -102,7 +102,7 @@ public class InitData implements CommandLineRunner {
         user2.setPassword(passwordEncoder.encode("password"));
         user2.setPhoneNumber(2222222);
         user2.setFirstName("Mads");
-        user2.setLastName("Diaz");
+        user2.setLastName("Folkmann");
         user2.setAddress("Vej 2");
         user2.setCity("Hvidovre");
         user2.setZipCode(2650);
@@ -111,12 +111,12 @@ public class InitData implements CommandLineRunner {
 
         User user3 = new User();
         user3.setRentalUnit(3112323123L);
-        user3.setEmail("hej@123.dk");
-        user3.setPassword(passwordEncoder.encode("hej"));
+        user3.setEmail("test@123.dk");
+        user3.setPassword(passwordEncoder.encode("test"));
         user3.setPhoneNumber(2222222);
-        user3.setFirstName("Hej");
-        user3.setLastName("Dig");
-        user3.setAddress("Vej 3");
+        user3.setFirstName("test");
+        user3.setLastName("test");
+        user3.setAddress("test 3");
         user3.setCity("Hvidovre");
         user3.setZipCode(2650);
         user3.setRole(Roles.USER);
@@ -263,15 +263,5 @@ public class InitData implements CommandLineRunner {
         case2.setDescription("Overholdt ikke tidsfristen for parkering");
         case2.setUser(user4);
         Case case2Saved = caseRepository.save(case2);
-
-
-
-
-
-
     }
-
-
-
-
 }

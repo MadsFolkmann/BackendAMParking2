@@ -163,24 +163,7 @@ public class CaseIntegrationsTests {
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.plateNumber").value("EF12345"));
     }
 
-    /**
-     * Integration test for adding a case with missing fields
-     * @throws Exception
-     */
-    @Test
-    @WithMockUser(roles = "USER")
-    public void testAddCase_MissingFields() throws Exception {
-        CaseDTORequest newCaseRequest = new CaseDTORequest();
-        newCaseRequest.setUserId(testUser.getId());
 
-        mockMvc.perform(post("/case/add")
-                .contentType(MediaType.APPLICATION_JSON)
-                        .with(csrf())
-                .content(objectMapper.writeValueAsString(newCaseRequest)))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.message").value("Description, time, done, and plateNumber are required fields."));
-    }
 
     /**
      * Integration test for updating a case

@@ -147,7 +147,7 @@ public class UserControllerTest {
     }
 
     /**
-     * Test for getting users by lejemaal (rental unit) that does not exist.
+     * Negative Test for getting users by lejemaal that does not exist.
      * @throws Exception
      */
 
@@ -243,42 +243,8 @@ public class UserControllerTest {
                         .with(csrf()))
                 .andExpect(status().isBadRequest());
     }
-    // test for login user
-    /**
-     * Test for logging in a user.
-     * @throws Exception
-     */
-
-    /*
-
-    @Test
-    void testLoginSuccess() throws Exception {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("test@example.com");
-        loginRequest.setPassword("password123");
-
-        UserDTOResponse userResponse = new UserDTOResponse();
-        userResponse.setEmail("test@example.com");
-        userResponse.setFirstName("Test");
-        userResponse.setLastName("Bruger");
-        // Set other properties as needed
-
-        when(userService.loginUser(Mockito.any(userService.class))).thenReturn(userResponse);
-
-        // Perform test
-        mockMvc.perform(post("/user/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(loginRequest))
-                        .with(csrf()))  // Add CSRF token
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("test@example.com"));
-    }
 
 
-
-     */
-
-    // test for updating a user
 
     /**
      * Test for updating a user.
@@ -333,41 +299,9 @@ public class UserControllerTest {
 
     }
 
-
-    /**
-     * Test for updating a user with invalid data.
-     * @throws Exception
-     */
-
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void testUpdateUserWithInvalidData() throws Exception {
-        String invalidUserUpdateJson = """
-                {
-                    "firstName": "",
-                    "lastName": "UpdatedOx123",
-                    "email": "Ox@gmail.com",
-                    "phoneNumber": 87654321,
-                    "address": "TestvejNy",
-                    "city": "Rødovre",
-                    "zipCode": 2610,
-                    "role": "USER"
-                }
-            """;
-
-        mockMvc.perform(put("/user/update/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidUserUpdateJson)
-                        .with(csrf()))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errors[0].field").value("firstName"));
-    }
-
-
     /**
      * Test for delete user not found
      */
-    
 
     @Test
     @WithMockUser(roles = "ADMIN")

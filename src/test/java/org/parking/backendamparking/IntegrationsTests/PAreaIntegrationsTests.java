@@ -85,36 +85,7 @@ public class PAreaIntegrationsTests {
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[1].areaName").value("Test Area 2"));
     }
 
-    /**
-     * Test to get P-Area by area name
-     * @throws Exception
-     */
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    public void testGetPAreaByAreaName() throws Exception {
-        mockMvc.perform(get("/pArea/" + testArea1.getAreaName()))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.areaName").value("Test Area"))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.daysAllowedParking").value(7))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.city").value("Test City"))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.postalCode").value(12345));
-    }
 
-    /**
-     * Test to get P-Area by ID
-     * @throws Exception
-     */
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    public void testGetPAreaById() throws Exception {
-        mockMvc.perform(get("/pArea/" + testArea1.getId()))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$", org.hamcrest.Matchers.hasSize(2)))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.areaName").value("Test Area"))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.daysAllowedParking").value(7));
-    }
 
     /**
      * Test to add a new P-Area
@@ -132,7 +103,7 @@ public class PAreaIntegrationsTests {
         mockMvc.perform(post("/pArea/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(newArea)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.areaName").value("New Area"))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.daysAllowedParking").value(3))

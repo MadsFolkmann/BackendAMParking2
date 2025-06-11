@@ -145,6 +145,31 @@ public class UserIntegrationsTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("USER"));
     }
 
+    /**
+     * Negative Integration test for adding a user with an existing email.
+     * @throws Exception if the request fails
+     */
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void testAddUserWithExistingEmail() throws Exception {
+        UserDTORequest newUserRequest = new UserDTORequest();
+        newUserRequest.setEmail("abdi@test.dk");
+        newUserRequest.setPassword("newPassword123");
+        newUserRequest.setFirstName("New");
+        newUserRequest.setLastName("User");
+        newUserRequest.setRentalUnit(1000000012L);
+        newUserRequest.setPhoneNumber(123456789);
+        newUserRequest.setRole(Roles.USER);
+
+        mockMvc.perform(post("/user/add")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newUserRequest)))
+                .andExpect(status().isConflict())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Email already exists"));
+    }
 
     /**
      * Integration test for updating a user.

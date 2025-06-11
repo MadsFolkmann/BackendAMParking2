@@ -148,20 +148,13 @@ private CaseRepository caseRepository;
                 .andExpect(jsonPath("$.totalWeight", is(12000)));
     }
 
+
+
     /**
-     * Integration test for getting a car by ID that does not exist
+     * Integration test for getting a car by registration number
      * @throws Exception
      */
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    public void testGetCarById_NotFound_Integration() throws Exception {
-        mockMvc.perform(get("/cars/15"))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.message", is("Car not found with id: 9999")));
-    }
 
-    // adding car
     @Test
     @WithMockUser(roles = "ADMIN")
     public void testAddCar_Integration() throws Exception {

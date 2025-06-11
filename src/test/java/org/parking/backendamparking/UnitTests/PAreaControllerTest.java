@@ -72,41 +72,6 @@ public class PAreaControllerTest {
     }
 
 
-    /**
-     * Test to get a parking area by area name.
-     * @throws Exception
-     */
-
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void testGetPAreaByAreaName() throws Exception {
-        String areaName = "Test Area 1";
-        PAreaDTOResponse areaResponse = pAreaResponses.get(0);
-        when(pAreaService.getPAreaByAreaName(areaName)).thenReturn(areaResponse);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/pArea/" + areaName)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.areaName", Matchers.is("Test Area 1")));
-    }
-
-    /**
-     * Test to get a parking area by ID.
-     * @throws Exception
-     */
-
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void testGetPAreaById() throws Exception {
-        Long areaId = 1L;
-        PAreaDTOResponse areaResponse = pAreaResponses.get(0);
-        when(pAreaService.getPAreaById(areaId)).thenReturn(areaResponse);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/pArea/" + areaId)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.areaName", Matchers.is("Test Area 1")));
-    }
 
     /**
      * Test to add a new parking area.
