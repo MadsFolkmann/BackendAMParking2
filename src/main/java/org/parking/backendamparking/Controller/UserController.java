@@ -5,6 +5,7 @@ import org.parking.backendamparking.DTO.LoginRequest;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.DTO.UserUpdateDTO;
+import org.parking.backendamparking.DTO.LoginResponse;
 import org.parking.backendamparking.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,7 @@ public class UserController {
      }
 
     @PostMapping("/login")
-    public UserDTOResponse loginUser(@RequestBody LoginRequest request) {
+    public LoginResponse loginUser(@RequestBody LoginRequest request) {
         return userService.loginUser(request.getEmail(), request.getPassword());
     }
 

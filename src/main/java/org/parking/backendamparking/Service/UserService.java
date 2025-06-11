@@ -1,6 +1,7 @@
 package org.parking.backendamparking.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.parking.backendamparking.DTO.LoginResponse;
 import org.parking.backendamparking.DTO.UserDTORequest;
 import org.parking.backendamparking.DTO.UserDTOResponse;
 import org.parking.backendamparking.DTO.UserUpdateDTO;
@@ -10,6 +11,7 @@ import org.parking.backendamparking.Repository.RentalUnitRepository;
 import org.parking.backendamparking.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.parking.backendamparking.Configuration.JwtUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +22,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final RentalUnitRepository rentalUnitRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public UserService(UserRepository userRepository, RentalUnitRepository rentalUnitRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, RentalUnitRepository rentalUnitRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.rentalUnitRepository = rentalUnitRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = new JwtUtil();
     }
 
     /** Get All Users
@@ -109,7 +113,7 @@ public class UserService {
      */
 
     /*  Login User  */
-    public UserDTOResponse loginUser(String email, String password) {
+    public LoginResponse loginUser(String email, String password) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("No user found with email: " + email));
 
@@ -117,7 +121,8 @@ public class UserService {
             throw new IllegalArgumentException("Invalid credentials");
         }
 
-        return new UserDTOResponse(user);
+        String token = jwtUtil.generateToken(user);
+        return new LoginResponse(token, new UserDTOResponse(user));
     }
 
     /** Update User
