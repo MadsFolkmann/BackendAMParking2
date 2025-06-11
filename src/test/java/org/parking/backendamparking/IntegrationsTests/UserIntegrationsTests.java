@@ -88,7 +88,7 @@ public class UserIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetAllUsers() throws Exception {
         mockMvc.perform(get("/user")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -104,7 +104,7 @@ public class UserIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetUserById() throws Exception {
         Long userId = testUser1.getId();
         mockMvc.perform(get("/user/" + userId)
@@ -120,7 +120,7 @@ public class UserIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testAddUser() throws Exception {
         UserDTORequest newUserRequest = new UserDTORequest();
         newUserRequest.setEmail("newUser@gmail.com");
@@ -151,7 +151,7 @@ public class UserIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testAddUserWithExistingEmail() throws Exception {
         UserDTORequest newUserRequest = new UserDTORequest();
         newUserRequest.setEmail("abdi@test.dk");
@@ -177,7 +177,7 @@ public class UserIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testUpdateUser() throws Exception {
         Long userId = testUser1.getId();
         UserDTORequest updateUserRequest = new UserDTORequest();
@@ -213,7 +213,7 @@ public class UserIntegrationsTests {
      * @throws Exception if the request fails
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testDeleteUser() throws Exception {
         Long userId = testUser2.getId();
 

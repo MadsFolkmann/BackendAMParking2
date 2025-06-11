@@ -75,7 +75,7 @@ public class PAreaIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetAllPAreas() throws Exception {
         mockMvc.perform(get("/pArea"))
                 .andExpect(status().isOk())
@@ -92,7 +92,7 @@ public class PAreaIntegrationsTests {
      * @throws Exception
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testAddPArea() throws Exception {
         PArea newArea = new PArea();
         newArea.setDaysAllowedParking(3);
@@ -117,7 +117,7 @@ public class PAreaIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testUpdatePArea() throws Exception {
         PAreaDTORequest updatedArea = new PAreaDTORequest ();
         updatedArea.setDaysAllowedParking(10);
@@ -143,7 +143,7 @@ public class PAreaIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testDeletePArea() throws Exception {
         Long areaId = testArea1.getId();
         mockMvc.perform(delete("/pArea/" + areaId)

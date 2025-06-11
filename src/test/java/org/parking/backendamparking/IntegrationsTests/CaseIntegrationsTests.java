@@ -93,7 +93,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetAllCases() throws Exception {
         mockMvc.perform(get("/case"))
                 .andExpect(status().isOk())
@@ -110,7 +110,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetCaseById() throws Exception {
         mockMvc.perform(get("/case/" + testCase1.getId()))
                 .andExpect(status().isOk())
@@ -125,7 +125,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(authorities = "PVAGT")
     public void testGetCasesByUserId() throws Exception {
         mockMvc.perform(get("/case/user/" + testUser.getId()))
                 .andExpect(status().isOk())
@@ -141,7 +141,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(authorities = "PVAGT")
     public void testAddCase() throws Exception {
         CaseDTORequest newCaseRequest = new CaseDTORequest();
         newCaseRequest.setUserId(testUser.getId());
@@ -171,7 +171,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(authorities = "USER")
     public void testUpdateCase() throws Exception {
         CaseDTORequest updatedCaseRequest = new CaseDTORequest();
         updatedCaseRequest.setDescription("Updated case description");
@@ -197,7 +197,7 @@ public class CaseIntegrationsTests {
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testDeleteCase() throws Exception {
        Long caseId = testCase1.getId();
         mockMvc.perform(delete("/case/" + caseId)

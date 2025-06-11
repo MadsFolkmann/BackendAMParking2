@@ -101,7 +101,7 @@ private CaseRepository caseRepository;
      * @throws Exception
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetAllCars_Integration() throws Exception {
         mockMvc.perform(get("/cars"))
                 .andExpect(status().isOk())
@@ -118,7 +118,7 @@ private CaseRepository caseRepository;
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetCarsByUserId_Integration() throws Exception {
         mockMvc.perform(get("/cars/user/" + testUser.getId()))
                 .andExpect(status().isOk())
@@ -134,7 +134,7 @@ private CaseRepository caseRepository;
      * @throws Exception
      */
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testGetCarById_Integration() throws Exception {
         mockMvc.perform(get("/cars/" + testCar1.getId()))
                 .andExpect(status().isOk())
@@ -156,7 +156,7 @@ private CaseRepository caseRepository;
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testAddCar_Integration() throws Exception {
         CarsDTORequest newCarRequest = new CarsDTORequest();
         newCarRequest.setRegistrationNumber("LMN789");
@@ -187,7 +187,7 @@ private CaseRepository caseRepository;
 
     // update car
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testUpdateCar_Integration() throws Exception {
         CarsDTORequest updateCarRequest = new CarsDTORequest();
         updateCarRequest.setId(testCar1.getId());
@@ -222,7 +222,7 @@ private CaseRepository caseRepository;
      */
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     public void testDeleteCar_Integration() throws Exception {
         Long carId = testCar1.getId();
         mockMvc.perform(delete("/cars/" + carId)
