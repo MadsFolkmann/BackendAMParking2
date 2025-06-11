@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/user/update/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/user/delete/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/user/lejemaal/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
-                        .requestMatchers(antMatcher("/user/login")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/login")).permitAll()
                         .requestMatchers(antMatcher("/user/{id}")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
 
                         /* Parking endpoints */
