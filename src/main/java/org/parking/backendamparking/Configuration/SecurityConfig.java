@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                
+
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         /* Public User endpoints */
@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/parking/active/plateNumber/**")).hasAnyAuthority("PVAGT", "ADMIN")
 
                         /* Cars endpoints */
-                        .requestMatchers(antMatcher("/cars")).hasAnyAuthority( "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/cars")).hasAnyAuthority( "ADMIN", "PVAGT", "USER")
                         .requestMatchers(antMatcher("/cars/**")).permitAll()
                         .requestMatchers(antMatcher("/cars/update/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/cars/delete/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
