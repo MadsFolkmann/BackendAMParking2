@@ -15,7 +15,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://abdiox.github.io") 
+                        .allowedOrigins("http://localhost:5173", "https://abdiox.github.io")
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -23,4 +23,3 @@ public class CorsConfig {
         };
     }
 }
-
