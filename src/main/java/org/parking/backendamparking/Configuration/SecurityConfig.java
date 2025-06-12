@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         /* Public User endpoints */
                         .requestMatchers(antMatcher("/user")).hasAnyAuthority( "ADMIN", "PVAGT")
+                        .requestMatchers(antMatcher("/user/add")).hasAnyAuthority("ADMIN", "PVAGT", "USER")
                         .requestMatchers(antMatcher("/user/update/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/user/delete/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
                         .requestMatchers(antMatcher("/user/lejemaal/**")).hasAnyAuthority("USER", "ADMIN", "PVAGT")
